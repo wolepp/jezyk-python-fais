@@ -12,15 +12,15 @@ def z2_11():
 
 def z2_12():
     pierwszeZnaki = ''
-    for w in line.split():
-        pierwszeZnaki += w[0]
-    print(pierwszeZnaki)
-
-def z2_13():
     ostatnieZnaki = ''
     for w in line.split():
+        pierwszeZnaki += w[0]
         ostatnieZnaki += w[-1]
-    print(ostatnieZnaki)
+    print('piewrsze znaki: ', pierwszeZnaki)
+    print('ostatnie znaki: ', ostatnieZnaki)
+
+def z2_13():
+    pass
 
 def z2_14():
     pass
