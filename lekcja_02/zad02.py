@@ -16,6 +16,34 @@ def z2_12():
         pierwszeZnaki += w[0]
     print(pierwszeZnaki)
 
+def z2_13():
+    pass
+
+def z2_14():
+    pass
+
+def z2_15():
+    pass
+
+def z2_16():
+    pass
+
+def z2_17():
+    pass
+
+def z2_18():
+    pass
+
+def z2_19():
+    pass
+
 z2_10()
 z2_11()
 z2_12()
+z2_13()
+z2_14()
+z2_15()
+z2_16()
+z2_17()
+z2_18()
+z2_19()
