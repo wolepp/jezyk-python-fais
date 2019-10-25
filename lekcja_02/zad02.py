@@ -17,7 +17,10 @@ def z2_12():
     print(pierwszeZnaki)
 
 def z2_13():
-    pass
+    ostatnieZnaki = ''
+    for w in line.split():
+        ostatnieZnaki += w[-1]
+    print(ostatnieZnaki)
 
 def z2_14():
     pass
