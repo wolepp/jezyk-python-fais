@@ -1,6 +1,6 @@
 line = """To jest wielowierszowy
-tekst zapisany
-do zmiennej
+tekst z ciagiem GvR wewnatrz
+zapisany do zmiennej
 o nazwie line"""
 word = "Konstantynopol"
 L = [1, 1, 2, 3, 5, 8, 11, 100]
@@ -36,7 +36,7 @@ def z2_15():
     print(''.join([str(x) for x in L]))
 
 def z2_16():
-    pass
+    print(line.replace('GvR', 'Guido van Rossum'))
 
 def z2_17():
     pass
