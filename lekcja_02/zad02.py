@@ -20,7 +20,7 @@ def z2_12():
     print('ostatnie znaki: ', ostatnieZnaki)
 
 def z2_13():
-    pass
+    print(len(''.join(line.split())))
 
 def z2_14():
     pass
