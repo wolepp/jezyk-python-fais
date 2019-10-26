@@ -25,13 +25,8 @@ def z2_13():
     print(len(''.join(line.split())))
 
 def z2_14():
-    max_length = 0
-    longest_word = ''
-    for word in line.split():
-        if len(word) > max_length:
-            max_length = len(word)
-            longest_word = word
-    print('najdluzsze slowo: "%s", znakow: %d' % (longest_word, max_length))
+    najdluzsze_slowo = max(line.split(), key=len)
+    print('najdluzsze slowo: "%s", znakow: %d' % (najdluzsze_slowo, len(najdluzsze_slowo)))
 
 def z2_15():
     print(''.join([str(x) for x in L]))
