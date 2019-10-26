@@ -16,18 +16,20 @@ def z2_12():
     for w in line.split():
         pierwszeZnaki += w[0]
         ostatnieZnaki += w[-1]
-    print('piewrsze znaki: ', pierwszeZnaki)
-    print('ostatnie znaki: ', ostatnieZnaki)
+    print('pierwsze znaki: ' + pierwszeZnaki)
+    print('ostatnie znaki: ' + ostatnieZnaki)
 
 def z2_13():
     print(len(''.join(line.split())))
 
 def z2_14():
     max_length = 0
+    longest_word = ''
     for word in line.split():
         if len(word) > max_length:
             max_length = len(word)
-    print(max_length)
+            longest_word = word
+    print('najdluzsze slowo: "%s", znakow: %d' % (longest_word, max_length))
 
 def z2_15():
     pass
