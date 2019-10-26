@@ -47,7 +47,7 @@ def z2_18():
     print(str(duza_liczba_calkowita).count('0'))
 
 def z2_19():
-    pass
+    print(''.join([str(x).zfill(3) for x in L]))
 
 z2_10()
 z2_11()
