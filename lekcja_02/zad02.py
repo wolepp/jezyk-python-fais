@@ -4,6 +4,7 @@ zapisany do zmiennej
 o nazwie line"""
 word = "Konstantynopol"
 L = [1, 1, 2, 3, 5, 8, 11, 100]
+duza_liczba_calkowita = 235125032030634069206324980
 
 def z2_10():
     print(len(line.split()))
@@ -43,7 +44,7 @@ def z2_17():
     print(sorted(line.split(), key=len))
 
 def z2_18():
-    pass
+    print(str(duza_liczba_calkowita).count('0'))
 
 def z2_19():
     pass
