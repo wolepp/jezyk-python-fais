@@ -27,6 +27,7 @@ def z2_14():
     for word in line.split():
         if len(word) > max_length:
             max_length = len(word)
+    print(max_length)
 
 def z2_15():
     pass
