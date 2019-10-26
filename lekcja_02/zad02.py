@@ -13,13 +13,8 @@ def z2_11():
     print('_'.join(list(word)))
 
 def z2_12():
-    pierwszeZnaki = ''
-    ostatnieZnaki = ''
-    for w in line.split():
-        pierwszeZnaki += w[0]
-        ostatnieZnaki += w[-1]
-    print('pierwsze znaki: ' + pierwszeZnaki)
-    print('ostatnie znaki: ' + ostatnieZnaki)
+    print('pierwsze znaki: ' + ''.join([w[0] for w in line.split()]))
+    print('ostatnie znaki: ' + ''.join([w[-1] for w in line.split()]))
 
 def z2_13():
     print(len(''.join(line.split())))
