@@ -23,7 +23,10 @@ def z2_13():
     print(len(''.join(line.split())))
 
 def z2_14():
-    pass
+    max_length = 0
+    for word in line.split():
+        if len(word) > max_length:
+            max_length = len(word)
 
 def z2_15():
     pass
