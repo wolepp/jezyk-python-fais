@@ -3,6 +3,7 @@ tekst zapisany
 do zmiennej
 o nazwie line"""
 word = "Konstantynopol"
+L = [1, 1, 2, 3, 5, 8, 11, 100]
 
 def z2_10():
     print(len(line.split()))
@@ -32,7 +33,7 @@ def z2_14():
     print('najdluzsze slowo: "%s", znakow: %d' % (longest_word, max_length))
 
 def z2_15():
-    pass
+    print(''.join([str(x) for x in L]))
 
 def z2_16():
     pass
