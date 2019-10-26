@@ -39,7 +39,8 @@ def z2_16():
     print(line.replace('GvR', 'Guido van Rossum'))
 
 def z2_17():
-    pass
+    print(sorted(line.split(), key=str.lower))
+    print(sorted(line.split(), key=len))
 
 def z2_18():
     pass
