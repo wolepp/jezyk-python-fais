@@ -51,7 +51,9 @@ def z3_2():
     assert mapowanie == [0, 1, 4, 9, 16, 25, 36, 49]
 
 def z3_3():
-    pass
+    for i in range(31):
+        if i % 3 == 0:
+            print(i)
 
 def z3_4():
     pass
