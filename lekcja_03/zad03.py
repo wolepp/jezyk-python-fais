@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-from sys import exc_info
-
 def z3_1():
     # Ten kod jest poprawny skladniowo zarowno w python2 jak i python3
     x = 2 ; y = 3 ;
@@ -80,11 +78,17 @@ def z3_5():
     miarka += '\n0'
     for i in range(1, length+1):
         miarka += ("%5d" % i)
-    miarka += '\n'
     print(miarka)
 
 def z3_6():
-    pass
+    x = int(input('dlugosc prostokota: '))
+    y = int(input('wysokosc prostokota: '))
+    prostokat = ''
+    for i in range(y):
+        prostokat += ('+---' * x) + '+\n'
+        prostokat += ('|   ' * x) + '|\n'
+    prostokat += ('+---' * x) + '+'
+    print(prostokat)
 
 def z3_8():
     pass
