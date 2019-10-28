@@ -1,3 +1,8 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+from sys import exc_info
+
 def z3_1():
     # Ten kod jest poprawny skladniowo zarowno w python2 jak i python3
     x = 2 ; y = 3 ;
@@ -47,8 +52,10 @@ def z3_2():
     # map(pow, range(8))
     # Funkcja pow wymaga podania dwoch argumentow, a podany jest tylko jeden:
     # range(8). Przykladowy dzialajacy kod:
-    mapowanie = map(pow, range(8), [2 for x in range(8)])
-    assert mapowanie == [0, 1, 4, 9, 16, 25, 36, 49]
+    L = [0, 1, 4, 9, 16, 25, 36, 49]
+    M = map(pow, range(8), [2 for x in range(8)])
+    for (x, i) in zip(L, M):
+        assert x == i
 
 def z3_3():
     for i in range(31):
@@ -56,7 +63,16 @@ def z3_3():
             print(i)
 
 def z3_4():
-    pass
+    while True:
+        x = input('Wpisz liczbe rzeczywista: ')
+        try:
+            x = float(x)
+            print(x, x**3)
+        except:
+            if x == 'stop':
+                break
+            else:
+                print('Nie podano liczby rzeczywistej')
 
 def z3_5():
     pass
