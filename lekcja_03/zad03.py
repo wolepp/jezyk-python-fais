@@ -75,7 +75,13 @@ def z3_4():
                 print('Nie podano liczby rzeczywistej')
 
 def z3_5():
-    pass
+    length = int(input('podaj dlugosc miarki: '))
+    miarka = ('|....' * length) + '|'
+    miarka += '\n0'
+    for i in range(1, length+1):
+        miarka += ("%5d" % i)
+    miarka += '\n'
+    print(miarka)
 
 def z3_6():
     pass
