@@ -107,23 +107,33 @@ def z3_9():
     print(list_of_sums)
     assert list_of_sums == [0,4,3,7,18]
 
-def roman2int(roman):
-    if type(roman) not str:
-        return
-    return 5
-
 def z3_10():
-    print('start')
-    print(roman2int(3))
-    print(roman2int('string'))
-    print(roman2int(4))
+    # Pierwszy sposob tworzenia slownika
+    D1 = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000,
+            }
+    assert D1['L'] == 50
+    assert D1['I'] == 1
 
-#z3_1();
-#z3_2();
-#z3_3();
-#z3_4();
-#z3_5();
-#z3_6();
-#z3_8();
-#z3_9();
+    # Drugi sposob tworzenia slownika
+    rzymskie = ['I', 'V', 'X', 'L', 'C', 'D', 'M']
+    arabskie = [1, 5, 10, 50, 100, 500, 1000]
+    D2 = dict(zip(rzymskie,arabskie))
+    assert D2['X'] == 10
+    assert D2['C'] == 100
+
+z3_1();
+z3_2();
+z3_3();
+z3_4();
+z3_5();
+z3_6();
+z3_8();
+z3_9();
 z3_10();
