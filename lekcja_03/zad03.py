@@ -91,20 +91,39 @@ def z3_6():
     print(prostokat)
 
 def z3_8():
-    pass
+    seq1 = [1,1,2,3,5,8,13,21,34]
+    seq2 = [1,2,3,4,5,6,7,7,100]
+    listA = list(set(seq1) & set(seq2))
+    listA.sort()
+    listB = list(set(seq1) | set(seq2))
+    listB.sort()
+    assert listA == [1,2,3,5]
+    assert listB == [1,2,3,4,5,6,7,8,13,21,34,100]
+
 
 def z3_9():
-    pass
+    seq = [[],[4],(1,2),[3,4],(5,6,7)]
+    list_of_sums = [sum(sublist) for sublist in seq]
+    print(list_of_sums)
+    assert list_of_sums == [0,4,3,7,18]
+
+def roman2int(roman):
+    if type(roman) not str:
+        return
+    return 5
 
 def z3_10():
-    pass
+    print('start')
+    print(roman2int(3))
+    print(roman2int('string'))
+    print(roman2int(4))
 
-z3_1();
-z3_2();
-z3_3();
-z3_4();
-z3_5();
-z3_6();
-z3_8();
-z3_9();
+#z3_1();
+#z3_2();
+#z3_3();
+#z3_4();
+#z3_5();
+#z3_6();
+#z3_8();
+#z3_9();
 z3_10();
