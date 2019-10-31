@@ -44,8 +44,12 @@ def zad4_4(n):
         fib0, fib1 = fib1, fib0 + fib1
     return fib1
 
-def zad4_5():
-    pass
+def odwracanie(L, left, right):
+    """odwraca kolejnosc elementow na liscie od left do right wlacznie."""
+
+    if not isinstance(L, list):
+        raise TypeError('L musi byc lista')
+
 
 def zad4_6():
     pass
@@ -55,3 +59,4 @@ def zad4_7():
 
 if __name__ == '__main__':
     #print([zad4_4(x) for x in range(15)])
+    odwracanie((1,2), 2,3)
