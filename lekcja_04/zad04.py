@@ -23,6 +23,7 @@ def zad4_2_prostokat():
 
 def zad4_3(n):
     """Iteracyjna wersja funkcji factorial(n)."""
+
     if n < 0:
         raise ValueError('n musi byc naturalne')
     silnia = 1
@@ -31,8 +32,17 @@ def zad4_3(n):
         silnia *= i
     return silnia
 
-def zad4_4():
-    pass
+def zad4_4(n):
+    """Iteracyjna wersja funkcji fibbonaci(n)"""
+
+    if n < 0:
+        raise ValueError('n musi byc naturalne')
+    if n == 0 or n == 1:
+        return n
+    fib0, fib1 = 0, 1
+    for i in range(2, n+1):
+        fib0, fib1 = fib1, fib0 + fib1
+    return fib1
 
 def zad4_5():
     pass
@@ -44,4 +54,4 @@ def zad4_7():
     pass
 
 if __name__ == '__main__':
-    print(zad4_3(4))
+    #print([zad4_4(x) for x in range(15)])
