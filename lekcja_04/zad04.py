@@ -3,8 +3,23 @@
 
 # TODO: sprawdzic kodowanie!
 
-def zad4_2(argu):
-    pass
+def zad4_2_miarka():
+    length = int(input('podaj dlugosc miarki: '))
+    miarka = ('|....' * length) + '|'
+    miarka += '\n0'
+    for i in range(1, length+1):
+        miarka += ("%5d" % i)
+    return miarka
+
+def zad4_2_prostokat():
+    x = int(input('dlugosc prostokota: '))
+    y = int(input('wysokosc prostokota: '))
+    prostokat = ''
+    for i in range(y):
+        prostokat += ('+---' * x) + '+\n'
+        prostokat += ('|   ' * x) + '|\n'
+    prostokat += ('+---' * x) + '+'
+    return prostokat
 
 def zad4_3():
     pass
