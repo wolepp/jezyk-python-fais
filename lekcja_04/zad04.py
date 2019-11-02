@@ -95,6 +95,7 @@ def zad4_3(n):
         raise TypeError('n musi byc liczba naturalna')
     if n < 0:
         raise ValueError('n musi byc naturalne')
+
     silnia = 1
     for i in range(1, n+1):
         silnia *= i
@@ -102,12 +103,33 @@ def zad4_3(n):
 
 
 def zad4_4(n):
-    """Iteracyjna wersja funkcji fibbonaci(n)"""
+    """
+    Iteracyjna wersja funkcji fibbonaci(n)
 
+    >>> zad4_4(5)
+    5
+    >>> [zad4_4(x) for x in range(10)]
+    [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+    >>> zad4_4(-1)
+    Traceback (most recent call last):
+        ...
+    ValueError: n musi byc naturalne
+    >>> zad4_4('string')
+    Traceback (most recent call last):
+        ...
+    TypeError: n musi byc liczba naturalna
+    """
+
+    try:
+        n = int(n)
+    except ValueError:
+        raise TypeError('n musi byc liczba naturalna')
     if n < 0:
         raise ValueError('n musi byc naturalne')
+
     if n == 0 or n == 1:
         return n
+
     fib0, fib1 = 0, 1
     for i in range(2, n+1):
         fib0, fib1 = fib1, fib0 + fib1
