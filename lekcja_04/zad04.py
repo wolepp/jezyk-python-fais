@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+from functools import reduce
+
 def zad4_2_miarka(length):
     """
     Zwraca miarke zadanej dlugosci.
@@ -96,10 +98,7 @@ def zad4_3(n):
     if n < 0:
         raise ValueError('n musi byc naturalne')
 
-    silnia = 1
-    for i in range(1, n+1):
-        silnia *= i
-    return silnia
+    return reduce(lambda a, b: a * b, range(1, n+1))
 
 
 def zad4_4(n):
