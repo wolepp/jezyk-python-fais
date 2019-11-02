@@ -194,8 +194,37 @@ def odwracanie(L, left, right):
     return L
 
 
-def zad4_6():
-    pass
+def sum_seq(sequence):
+    """
+    Oblicza sume liczb w sequence, ktora moze miec zagniezdzone sekwencje.
+
+    >>> sum_seq([1, 2, 3])
+    6
+    >>> sum_seq((1, 2, 3))
+    6
+    >>> sum_seq([[[], [3, 5], (2, 6)], 7, 8])
+    31
+    >>> sum_seq(4)
+    Traceback (most recent call last):
+        ...
+    TypeError: sequence nie jest sekwencja
+    >>> sum_seq('string')
+    Traceback (most recent call last):
+        ...
+    TypeError: sequence nie jest sekwencja
+    """
+
+    if not isinstance(sequence, (list, tuple)):
+        raise TypeError('sequence nie jest sekwencja')
+
+    asum = 0
+    for element in sequence:
+        if isinstance(element, (list, tuple)):
+            asum += sum_seq(element)
+        else:
+            asum += element
+    return asum
+
 
 def zad4_7():
     pass
