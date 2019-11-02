@@ -1,10 +1,33 @@
-#!/usr/bin/python3
-# -*- coding: iso-8859-2 -*-
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 # TODO: sprawdzic kodowanie!
 
-def zad4_2_miarka():
-    length = int(input('podaj dlugosc miarki: '))
+def zad4_2_miarka(length):
+    """
+    Zwraca miarke zadanej dlugosci.
+
+    >>> zad4_2_miarka(5)
+    '|....|....|....|....|....|\\n0    1    2    3    4    5'
+    >>> zad4_2_miarka(0)
+    '|\\n0'
+    >>> zad4_2_miarka(-3)
+    Traceback (most recent call last):
+        ...
+    ValueError: dlugosc musi byc wieksza niz 0
+    >>> zad4_2_miarka('string')
+    Traceback (most recent call last):
+        ...
+    TypeError: dlugosc musi byc liczba
+    """
+    
+    try:
+        length = int(length)
+    except ValueError:
+        raise TypeError('dlugosc musi byc liczba')
+    if length < 0:
+        raise ValueError('dlugosc musi byc wieksza niz 0')
+
     miarka = ('|....' * length) + '|'
     miarka += '\n0'
     for i in range(1, length+1):
@@ -27,7 +50,6 @@ def zad4_3(n):
     if n < 0:
         raise ValueError('n musi byc naturalne')
     silnia = 1
-    #TODO: silnia z 0?
     for i in range(1, n+1):
         silnia *= i
     return silnia
@@ -58,5 +80,7 @@ def zad4_7():
     pass
 
 if __name__ == '__main__':
-    #print([zad4_4(x) for x in range(15)])
-    odwracanie((1,2), 2,3)
+    import doctest
+    doctest.testmod()
+
+
