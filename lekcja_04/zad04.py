@@ -74,8 +74,25 @@ def zad4_2_prostokat(x, y):
 
 
 def zad4_3(n):
-    """Iteracyjna wersja funkcji factorial(n)."""
+    """
+    Iteracyjna wersja funkcji factorial(n).
 
+    >>> zad4_3(5)
+    120
+    >>> zad4_3(-1)
+    Traceback (most recent call last):
+        ...
+    ValueError: n musi byc naturalne
+    >>> zad4_3('string')
+    Traceback (most recent call last):
+        ...
+    TypeError: n musi byc liczba naturalna
+    """
+
+    try:
+        n = int(n)
+    except ValueError:
+        raise TypeError('n musi byc liczba naturalna')
     if n < 0:
         raise ValueError('n musi byc naturalne')
     silnia = 1
