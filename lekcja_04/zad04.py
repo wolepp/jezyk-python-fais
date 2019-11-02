@@ -225,11 +225,38 @@ def sum_seq(sequence):
     return asum
 
 
-def zad4_7():
-    pass
+def flatten(sequence):
+    """
+    Splaszcza strukture sequence, ktora moze miec zagniezdzone sekwencje.
+
+    >>> flatten([])
+    []
+    >>> flatten([1, 2, 3])
+    [1, 2, 3]
+    >>> flatten([1,(2,3),[],[4,(5,6,7)],8,[9]])
+    [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    >>> flatten(3)
+    Traceback (most recent call last):
+        ...
+    TypeError: sequence nie jest sekwencja
+    >>> flatten('string')
+    Traceback (most recent call last):
+        ...
+    TypeError: sequence nie jest sekwencja
+    """
+
+    if not isinstance(sequence, (list, tuple)):
+        raise TypeError('sequence nie jest sekwencja')
+
+    alist = []
+    for element in sequence:
+        if isinstance(element, (list, tuple)):
+            alist.extend(flatten(element))
+        else:
+            alist.append(element)
+    return alist 
+
 
 if __name__ == '__main__':
     import doctest
     doctest.testmod()
-
-
