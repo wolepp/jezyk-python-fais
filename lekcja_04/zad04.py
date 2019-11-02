@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# TODO: sprawdzic kodowanie!
-
 def zad4_2_miarka(length):
     """
     Zwraca miarke zadanej dlugosci.
@@ -34,15 +32,46 @@ def zad4_2_miarka(length):
         miarka += ("%5d" % i)
     return miarka
 
-def zad4_2_prostokat():
-    x = int(input('dlugosc prostokota: '))
-    y = int(input('wysokosc prostokota: '))
+
+def zad4_2_prostokat(x, y):
+    """
+    Zwraca prostokat o zadanych wymiarach.
+
+    >>> zad4_2_prostokat(3,2)
+    '+---+---+---+\\n|   |   |   |\\n+---+---+---+\\n|   |   |   |\\n+---+---+---+'
+    >>> zad4_2_prostokat(0,1)
+    '+\\n|\\n+'
+    >>> zad4_2_prostokat(0,0)
+    '+'
+    >>> zad4_2_prostokat(-2,3)
+    Traceback (most recent call last):
+        ...
+    ValueError: wymiar musi byc co najmniej rowny 0
+    >>> zad4_2_prostokat(2,-3)
+    Traceback (most recent call last):
+        ...
+    ValueError: wymiar musi byc co najmniej rowny 0
+    >>> zad4_2_prostokat(2,'string')
+    Traceback (most recent call last):
+        ...
+    TypeError: wymiar musi byc liczba
+    """ 
+
+    try:
+        x = int(x)
+        y = int(y)
+    except ValueError:
+        raise TypeError('wymiar musi byc liczba')
+    if x < 0 or y < 0:
+        raise ValueError('wymiar musi byc co najmniej rowny 0')
+
     prostokat = ''
     for i in range(y):
         prostokat += ('+---' * x) + '+\n'
         prostokat += ('|   ' * x) + '|\n'
     prostokat += ('+---' * x) + '+'
     return prostokat
+
 
 def zad4_3(n):
     """Iteracyjna wersja funkcji factorial(n)."""
@@ -53,6 +82,7 @@ def zad4_3(n):
     for i in range(1, n+1):
         silnia *= i
     return silnia
+
 
 def zad4_4(n):
     """Iteracyjna wersja funkcji fibbonaci(n)"""
@@ -66,11 +96,13 @@ def zad4_4(n):
         fib0, fib1 = fib1, fib0 + fib1
     return fib1
 
+
 def odwracanie(L, left, right):
     """odwraca kolejnosc elementow na liscie od left do right wlacznie."""
 
     if not isinstance(L, list):
         raise TypeError('L musi byc lista')
+
 
 
 def zad4_6():
