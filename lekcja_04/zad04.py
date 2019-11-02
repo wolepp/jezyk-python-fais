@@ -137,11 +137,61 @@ def zad4_4(n):
 
 
 def odwracanie(L, left, right):
-    """odwraca kolejnosc elementow na liscie od left do right wlacznie."""
+    """
+    Odwraca kolejnosc elementow na liscie od left do right wlacznie.
+
+    Obsluguje ujemne indeksy.
+    >>> odwracanie(list(range(10)), 0, 9)
+    [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+    >>> odwracanie(list(range(10)), 2, 4)
+    [0, 1, 4, 3, 2, 5, 6, 7, 8, 9]
+    >>> odwracanie(list(range(10)), 3, -2)
+    [0, 1, 2, 8, 7, 6, 5, 4, 3, 9]
+    >>> odwracanie(list(range(10)), 8, 5)
+    [0, 1, 2, 3, 4, 8, 7, 6, 5, 9]
+    >>> odwracanie(list(range(10)), -7, -4)
+    [0, 1, 2, 6, 5, 4, 3, 7, 8, 9]
+    >>> odwracanie(3, 2, 5)
+    Traceback (most recent call last):
+        ...
+    TypeError: L musi byc lista
+    >>> odwracanie([0, 1], 3, 1)
+    Traceback (most recent call last):
+        ...
+    IndexError: argument left poza lista
+    >>> odwracanie([0, 1], 1, 4)
+    Traceback (most recent call last):
+        ...
+    IndexError: argument right poza lista
+    """
 
     if not isinstance(L, list):
         raise TypeError('L musi byc lista')
+    try:
+        left = int(left)
+        right = int(right)
+    except ValueError:
+        raise TypeError('wartosci left i right musza byc liczbami calkowitymi')
 
+    # obsluga ujemnych indeksow
+    if left < 0:
+        left = len(L) + left
+    if right < 0:
+        right = len(L) + right
+
+    # sprawdz czy nie jest poza
+    if left >= len(L):
+        raise IndexError('argument left poza lista')
+    if right >= len(L):
+        raise IndexError('argument right poza lista')
+    
+    if left > right:
+        right, left = left, right
+
+    while left < right:
+        L[left], L[right] = L[right], L[left]
+        left, right = left + 1, right - 1
+    return L
 
 
 def zad4_6():
