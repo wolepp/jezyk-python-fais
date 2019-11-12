@@ -248,7 +248,20 @@ def cmp_frac(frac1, frac2):
     return -1
 
 
-def frac2float(frac): pass
+def frac2float(frac):
+    """
+    Konwertuje ułamek do float.
+
+    >>> frac2float([1, 2])
+    0.5
+    >>> frac2float([-3, 2])
+    -1.5
+    """
+
+    if not is_frac(frac):
+        raise TypeError("frac nie jest ulamkiem")
+
+    return frac[0] / frac[1]
 
 
 if __name__ == "__main__":
