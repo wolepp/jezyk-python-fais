@@ -7,7 +7,7 @@ Ułamek reprezentowany przez listę dwóch liczb całkowitych [licznik, mianowni
 Wojciech Lepich
 """
 
-import doctest
+import unittest
 from math import gcd    # fractions.gcd is deprecated
 
 
@@ -180,6 +180,8 @@ def div_frac(frac1, frac2):
     ValueError: Nie mozna dzielic przez zero
     """
 
+    if not is_frac(frac1, frac2):
+        raise TypeError("argumenty musza byc ulamkiem")
     if is_zero(frac2):
         raise ValueError('Nie mozna dzielic przez zero')
 
@@ -209,7 +211,7 @@ def is_positive(frac):
 
 def is_zero(frac):
     """
-    Sprawdza czy ułamek jest równy zero
+    Sprawdza czy ułamek jest równy zero.
 
     >>> is_zero([0, 3])
     True
@@ -264,5 +266,75 @@ def frac2float(frac):
     return frac[0] / frac[1]
 
 
+class TestFractions(unittest.TestCase):
+    """
+    Klasa testująca funkcje modułu fracs.
+    """
+
+    def setUp(self):
+        self.zero = [0, 1]
+
+    def test_add_frac(self):
+        self.assertEqual(add_frac([1, 2], [1, 3]), [5, 6])
+        self.assertEqual(add_frac([1, 2], [6, 4]), [2, 1])
+        self.assertEqual(add_frac([-3, 4], [3, 4]), [0, 1])
+
+        self.assertRaises(TypeError, lambda: add_frac(3, 5))
+
+    def test_sub_frac(self):
+        self.assertEqual(sub_frac([3, 4], [1, 4]), [1, 2])
+        self.assertEqual(sub_frac([3, 4], [4, 5]), [-1, 20])
+        self.assertEqual(sub_frac([1, 3], [-2, 3]), [1, 1])
+        self.assertEqual(sub_frac([-2, 4], [-3, 4]), [1, 4])
+
+        self.assertRaises(TypeError, lambda: sub_frac(3, 5))
+
+    def test_mul_frac(self):
+        self.assertEqual(mul_frac([3, 4], [1, 2]), [3, 8])
+        self.assertEqual(mul_frac([3, 4], [0, 2]), [0, 1])
+        self.assertEqual(mul_frac([3, 4], [-1, 2]), [-3, 8])
+
+        self.assertRaises(TypeError, lambda: mul_frac(3, 5))
+
+    def test_div_frac(self):
+        self.assertEqual(div_frac([3, 4], [1, 2]), [3, 2])
+        self.assertEqual(div_frac([3, 4], [-1, 2]), [-3, 2])
+
+        self.assertRaises(TypeError, lambda: div_frac(3, 5))
+        self.assertRaises(ValueError, lambda: div_frac([1, 3], [0, 1]))
+
+    def test_is_positive(self):
+        self.assertTrue(is_positive([1, 2]))
+        self.assertTrue(is_positive([-1, -2]))
+
+        self.assertFalse(is_positive([-1, 2]))
+        self.assertFalse(is_positive([1, -2]))
+
+        self.assertRaises(TypeError, lambda: is_positive('string'))
+
+    def test_is_zero(self):
+        self.assertTrue(is_zero([0, 3]))
+
+        self.assertFalse(is_zero([1, 2]))
+
+        self.assertRaises(TypeError, lambda: is_zero('string'))
+
+    def test_cmp_frac(self):
+        self.assertEqual(cmp_frac([5, 2], [3, 2]), 1)
+        self.assertEqual(cmp_frac([1, 2], [3, 2]), -1)
+        self.assertEqual(cmp_frac([3, 2], [3, 2]), 0)
+
+        self.assertRaises(TypeError, lambda: cmp_frac(3, 2))
+
+    def test_frac2float(self):
+        self.assertEqual(frac2float([1, 2]), 0.5)
+        self.assertEqual(frac2float([-3, 2]), -1.5)
+
+        self.assertRaises(TypeError, lambda: frac2float(42))
+
+    def tearDown(self):
+        pass
+
+
 if __name__ == "__main__":
-    doctest.testmod()
+    unittest.main()
