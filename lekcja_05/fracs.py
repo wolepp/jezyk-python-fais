@@ -191,7 +191,18 @@ def is_positive(frac):
 
 
 def is_zero(frac):
-    # temporary scratch solution
+    """
+    Sprawdza czy ułamek jest równy zero
+
+    >>> is_zero([0, 3])
+    True
+    >>> is_zero([1, 2])
+    False
+    """
+
+    if not is_frac(frac):
+        raise TypeError("frac nie jest ulamkiem")
+
     if frac[0] == 0:
         return True
     return False
