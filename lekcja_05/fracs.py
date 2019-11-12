@@ -70,6 +70,22 @@ def simplify_frac(frac):
     return [-licznik // dzielnik, -mianownik // dzielnik]
 
 
+def reverse_frac(frac):
+    """
+    Odwraca zwrócony ułamek.
+
+    >>> reverse_frac([1, 2])
+    [2, 1]
+    >>> reverse_frac([8, -4])
+    [-4, 8]
+    """
+
+    if not is_frac(frac):
+        raise TypeError("frac nie jest ulamkiem")
+
+    return [frac[1], frac[0]]
+
+
 def add_frac(frac1, frac2):
     """
     Zwraca ułamek będący sumą frac1 i frac2.
@@ -132,13 +148,53 @@ def mul_frac(frac1, frac2):
     return simplify_frac([frac1[0] * frac2[0], frac1[1] * frac2[1]])
 
 
-def div_frac(frac1, frac2): pass
+def div_frac(frac1, frac2):
+    """
+    Zwraca ułamek będący wynikiem dzielenia frac1 przez frac2.
+
+    >>> div_frac([3, 4], [1, 2])
+    [3, 2]
+    >>> div_frac([3, 4], [-1, 2])
+    [-3, 2]
+    >>> div_frac([3, 4], [0, 2])
+    Traceback (most recent call last):
+        ...
+    ValueError: Nie mozna dzielic przez zero
+    """
+
+    if is_zero(frac2):
+        raise ValueError('Nie mozna dzielic przez zero')
+
+    return mul_frac(frac1, reverse_frac(frac2))
 
 
-def is_positive(frac): pass
+def is_positive(frac):
+    """
+    Sprawdza czy ułamek ma dodatnią wartość.
+
+    >>> is_positive([1, 2])
+    True
+    >>> is_positive([-1, -2])
+    True
+    >>> is_positive([-1, 2])
+    False
+    >>> is_positive([1, -2])
+    False
+    """
+
+    if not is_frac(frac):
+        raise TypeError("frac nie jest ulamkiem")
+
+    return (frac[0] > 0 and frac[1] > 0) \
+        or (frac[0] < 0 and frac[1] < 0)
 
 
-def is_zer(frac): pass
+
+def is_zero(frac):
+    # temporary scratch solution
+    if frac[0] == 0:
+        return True
+    return False
 
 
 def cmp_frac(frac1, frac2): pass
