@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 Zawiera rekurencyjne funkcje do obliczania silnii oraz wyrazow
 ciagu Fibonacciego.
