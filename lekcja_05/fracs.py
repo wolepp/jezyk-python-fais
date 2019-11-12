@@ -26,7 +26,10 @@ def is_frac(*args):
     """
 
     for arg in args:
-        if not isinstance(arg, list) or not len(arg) == 2:
+        if not isinstance(arg, list) \
+                or not len(arg) == 2 \
+                or not isinstance(arg[0], int) \
+                or not isinstance(arg[1], int):
             return False
     return True
 
