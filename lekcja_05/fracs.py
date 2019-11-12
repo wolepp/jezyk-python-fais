@@ -11,11 +11,13 @@ import doctest
 from math import gcd    # fractions.gcd is deprecated
 
 
-def is_frac(frac):
+def is_frac(*args):
     """
     Sprawdza czy frac jest ułamkiem i zwraca True lub False.
 
     >>> is_frac([1, 2])
+    True
+    >>> is_frac([1, 2], [-4, 3])
     True
     >>> is_frac([1, 2, 3])
     False
@@ -23,8 +25,9 @@ def is_frac(frac):
     False
     """
 
-    if not isinstance(frac, list) or not len(frac) == 2:
-        return False
+    for arg in args:
+        if not isinstance(arg, list) or not len(arg) == 2:
+            return False
     return True
 
 
@@ -79,10 +82,8 @@ def add_frac(frac1, frac2):
     [0, 1]
     """
 
-    if not is_frac(frac1):
-        raise TypeError("frac1 nie jest ulamkiem")
-    if not is_frac(frac2):
-        raise TypeError("frac2 nie jest ulamkiem")
+    if not is_frac(frac1, frac2):
+        raise TypeError("argumenty musza byc ulamkiem")
 
     mianownik = lcm(frac1[1], frac2[1])
     licznik = frac1[0] * mianownik // frac1[1] + \
@@ -104,19 +105,31 @@ def sub_frac(frac1, frac2):
     [1, 4]
     """
 
-    if not is_frac(frac1):
-        raise TypeError("frac1 nie jest ulamkiem")
-    if not is_frac(frac2):
-        raise TypeError("frac2 nie jest ulamkiem")
+    if not is_frac(frac1, frac2):
+        raise TypeError("argumenty musza byc ulamkiem")
 
     mianownik = lcm(frac1[1], frac2[1])
     licznik = frac1[0] * mianownik // frac1[1] - \
         frac2[0] * mianownik // frac2[1]
     return simplify_frac([licznik, mianownik])
-    
 
 
-def mul_frac(frac1, frac2): pass
+def mul_frac(frac1, frac2):
+    """
+    Zwraca ułamek będący wynikiem mnożenia frac1 przez frac2.
+
+    >>> mul_frac([3, 4], [1, 2])
+    [3, 8]
+    >>> mul_frac([3, 4], [0, 2])
+    [0, 1]
+    >>> mul_frac([3, 4], [-1, 2])
+    [-3, 8]
+    """
+
+    if not is_frac(frac1, frac2):
+        raise TypeError("argumenty musza byc ulamkiem")
+
+    return simplify_frac([frac1[0] * frac2[0], frac1[1] * frac2[1]])
 
 
 def div_frac(frac1, frac2): pass
