@@ -70,6 +70,24 @@ def simplify_frac(frac):
     return [-licznik // dzielnik, -mianownik // dzielnik]
 
 
+def abs_frac(frac):
+    """
+    Zwraca wartość bezwzględną ułamka.
+
+    >>> abs_frac([2, 4])
+    [2, 4]
+    >>> abs_frac([-1, 2])
+    [1, 2]
+    >>> abs_frac([1, -2])
+    [1, 2]
+    """
+
+    if not is_frac(frac):
+        raise TypeError("frac nie jest ulamkiem")
+
+    return [abs(frac[0]), abs(frac[1])]
+
+
 def reverse_frac(frac):
     """
     Odwraca zwrócony ułamek.
@@ -99,7 +117,7 @@ def add_frac(frac1, frac2):
     """
 
     if not is_frac(frac1, frac2):
-        raise TypeError("argumenty musza byc ulamkiem")
+        raise TypeError("argumenty musza byc ulamkami")
 
     mianownik = lcm(frac1[1], frac2[1])
     licznik = frac1[0] * mianownik // frac1[1] + \
@@ -122,7 +140,7 @@ def sub_frac(frac1, frac2):
     """
 
     if not is_frac(frac1, frac2):
-        raise TypeError("argumenty musza byc ulamkiem")
+        raise TypeError("argumenty musza byc ulamkami")
 
     mianownik = lcm(frac1[1], frac2[1])
     licznik = frac1[0] * mianownik // frac1[1] - \
@@ -189,7 +207,6 @@ def is_positive(frac):
         or (frac[0] < 0 and frac[1] < 0)
 
 
-
 def is_zero(frac):
     """
     Sprawdza czy ułamek jest równy zero
@@ -208,7 +225,27 @@ def is_zero(frac):
     return False
 
 
-def cmp_frac(frac1, frac2): pass
+def cmp_frac(frac1, frac2):
+    """
+    Porównuje dwa ułamki
+
+    >>> cmp_frac([5,2], [3,2])
+    1
+    >>> cmp_frac([1,2], [3,2])
+    -1
+    >>> cmp_frac([3,2], [3,2])
+    0
+    """
+
+    if not is_frac(frac1, frac2):
+        raise TypeError("argumenty musza byc ulamkami")
+
+    sub_of_abs = sub_frac(abs_frac(frac1), abs_frac(frac2))
+    if sub_of_abs[0] > 0:
+        return 1
+    if sub_of_abs[0] == 0:
+        return 0
+    return -1
 
 
 def frac2float(frac): pass
