@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
+"""
+Zadanie 6.1
 
+Wojciech Lepich
+"""
 
 import unittest
 
@@ -59,7 +63,8 @@ class Time:
 
 class TestTime(unittest.TestCase):
 
-    def setUp(self): pass
+    def setUp(self):
+        pass
 
     def test_print(self):               # test str() i repr()
         self.assertEqual(str(Time(4834)), '01:20:34')
@@ -84,7 +89,8 @@ class TestTime(unittest.TestCase):
         self.assertEqual(int(Time(10)), 10)
         self.assertEqual(int(Time(6500)), 6500)
 
-    def tearDown(self): pass
+    def tearDown(self):
+        pass
 
 
 if __name__ == "__main__":
