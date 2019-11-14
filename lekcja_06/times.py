@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+
+import unittest
+
+
 class Time:
     """Klasa reprezentująca odcinek czasu."""
 
@@ -52,7 +56,6 @@ class Time:
 
 # Kod testujący moduł.
 
-import unittest
 
 class TestTime(unittest.TestCase):
 
@@ -60,25 +63,29 @@ class TestTime(unittest.TestCase):
 
     def test_print(self):               # test str() i repr()
         self.assertEqual(str(Time(4834)), '01:20:34')
+        self.assertEqual(str(Time(1)), '00:00:01')
+        self.assertEqual(str(Time(65)), '00:01:05')
+        self.assertEqual(str(Time(86399)), '23:59:59')
+        self.assertEqual(str(Time(86400)), '24:00:00')
 
     def test_add(self):
         self.assertEqual(Time(1) + Time(2), Time(3))
 
     def test_cmp(self):
-       # Można sprawdzać ==, !=, >, >=, <, <=.
-       self.assertTrue(Time(1) == Time(1))
-       self.assertTrue(Time(1) != Time(2))
-       self.assertTrue(Time(3) > Time(2))
-       self.assertTrue(Time(3) >= Time(3))
-       self.assertTrue(Time(2) < Time(3))
-       self.assertTrue(Time(3) <= Time(3))
+        # Można sprawdzać ==, !=, >, >=, <, <=.
+        self.assertTrue(Time(1) == Time(1))
+        self.assertTrue(Time(1) != Time(2))
+        self.assertTrue(Time(3) > Time(2))
+        self.assertTrue(Time(3) >= Time(3))
+        self.assertTrue(Time(2) < Time(3))
+        self.assertTrue(Time(3) <= Time(3))
 
     def test_int(self):
         self.assertEqual(int(Time(10)), 10)
-        self.assertEqual(int(Time(10)), 10)
+        self.assertEqual(int(Time(6500)), 6500)
 
     def tearDown(self): pass
 
+
 if __name__ == "__main__":
     unittest.main()     # wszystkie testy
-
