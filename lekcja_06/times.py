@@ -75,19 +75,42 @@ class TestTime(unittest.TestCase):
 
     def test_add(self):
         self.assertEqual(Time(1) + Time(2), Time(3))
+        self.assertEqual(Time(50) + Time(0), Time(50))
 
-    def test_cmp(self):
-        # Można sprawdzać ==, !=, >, >=, <, <=.
-        self.assertTrue(Time(1) == Time(1))
-        self.assertTrue(Time(1) != Time(2))
-        self.assertTrue(Time(3) > Time(2))
-        self.assertTrue(Time(3) >= Time(3))
+    def test_lt(self):
         self.assertTrue(Time(2) < Time(3))
+        self.assertTrue(Time(5) < Time(8))
+        self.assertFalse(Time(10) < Time(1))
+
+    def test_gt(self):
+        self.assertTrue(Time(3) > Time(2))
+        self.assertTrue(Time(7) > Time(3))
+        self.assertFalse(Time(3) > Time(9))
+
+    def test_le(self):
         self.assertTrue(Time(3) <= Time(3))
+        self.assertTrue(Time(3) <= Time(30))
+        self.assertFalse(Time(30) <= Time(9))
+
+    def test_ge(self):
+        self.assertTrue(Time(3) >= Time(3))
+        self.assertTrue(Time(6) >= Time(3))
+        self.assertFalse(Time(4) >= Time(8))
+
+    def test_eq(self):
+        self.assertTrue(Time(1) == Time(1))
+        self.assertTrue(Time(100) == Time(100))
+        self.assertFalse(Time(1) == Time(900))
+
+    def test_ne(self):
+        self.assertTrue(Time(1) != Time(2))
+        self.assertTrue(Time(4) != Time(2))
+        self.assertFalse(Time(5) != Time(5))
 
     def test_int(self):
         self.assertEqual(int(Time(10)), 10)
         self.assertEqual(int(Time(6500)), 6500)
+        self.assertNotEqual(int(Time(50)), 49)
 
     def tearDown(self):
         pass
