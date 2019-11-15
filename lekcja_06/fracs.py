@@ -54,7 +54,7 @@ class Frac:
 
     def __truediv__(self, other):  # frac1 / frac2
         if other.x == 0:
-            raise ValueError('Nie mozna dzielic przez zero')
+            raise ZeroDivisionError('Nie mozna dzielic przez zero')
         return self * ~other
 
     # operatory jednoargumentowe
@@ -140,7 +140,7 @@ class TestFrac(unittest.TestCase):
         self.assertEqual(Frac(3, 4) / Frac(1, 2), Frac(3, 2))
         self.assertEqual(Frac(3, 4) / Frac(-1, 2), Frac(-3, 2))
 
-        self.assertRaises(ValueError, lambda: Frac(1, 3) / Frac(0, 1))
+        self.assertRaises(ZeroDivisionError, lambda: Frac(1, 3) / Frac(0, 1))
 
     def test___pos__(self):
         self.assertEqual(+Frac(2, 5), Frac(2, 5))
