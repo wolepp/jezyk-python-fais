@@ -38,17 +38,37 @@ class Rectangle:
         return not self == other
 
     def center(self):          # zwraca środek prostokąta
+        x = (self.pt1.x + self.pt2.x) / 2
+        y = (self.pt1.y + self.pt2.y) / 2
+        return Point(x, y)
+
+    def area(self):            # pole powierzchni
+        width = abs(self.pt1.x) + abs(self.pt2.x)
+        length = abs(self.pt1.y) + abs(self.pt2.y)
+        return width * length
+
+    def move(self, x, y):      # przesunięcie o (x, y)
+        v = Point(x, y)
+        self.pt1 += v
+        self.pt2 += v
+        return self
+
+    def intersection(self, other):  # część wspólna prostokątów
+        x1 = max(self.pt1.x, other.pt1.x)
+        y1 = max(self.pt1.y, other.pt1.y)
+        x2 = min(self.pt2.x, other.pt2.x)
+        y2 = min(self.pt2.y, other.pt2.y)
+        return Rectangle(x1, y1, x2, y2)
+
+    def cover(self, other):    # prostąkąt nakrywający oba
+        x1 = min(self.pt1.x, other.pt1.x)
+        y1 = min(self.pt1.y, other.pt1.y)
+        x2 = max(self.pt2.x, other.pt2.x)
+        y2 = max(self.pt2.y, other.pt2.y)
+        return Rectangle(x1, y1, x2, y2)
+
+    def make4(self):           # zwraca listę czterech mniejszych
         pass
-
-    def area(self): pass            # pole powierzchni
-
-    def move(self, x, y): pass      # przesunięcie o (x, y)
-
-    def intersection(self, other): pass  # część wspólna prostokątów
-
-    def cover(self, other): pass    # prostąkąt nakrywający oba
-
-    def make4(self): pass           # zwraca listę czterech mniejszych
 
 # Kod testujący moduł.
 
@@ -77,6 +97,70 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(Rectangle(-5, -4, -3, -2), Rectangle(-5, -4, -3, -2))
 
     def test_center(self):
+        self.assertEqual(Rectangle(0, 0, 4, 2).center(), Point(2, 1))
+        self.assertEqual(Rectangle(-4, -4, 6, 12).center(), Point(1, 4))
+
+    def test_area(self):
+        self.assertEqual(Rectangle(0, 0, 4, 2).area(), 8)
+        self.assertEqual(Rectangle(-4, -4, 6, 12).area(), 160)
+
+    def test_move(self):
+        self.assertEqual(Rectangle(0, 0, 4, 2).move(3, 5), Rectangle(3, 5, 7, 7))
+        self.assertEqual(Rectangle(-4, -4, 6, 12).move(-6, 2), Rectangle(-10, -2, 0, 14))
+
+    def test_intersection(self):
+        # w tym samym miejscu
+        self.assertEqual(
+            Rectangle(0, 0, 4, 4).intersection(Rectangle(0, 0, 4, 4)),
+            Rectangle(0, 0, 4, 4))
+
+        # drugi prostokąt na NE
+        self.assertEqual(
+            Rectangle(0, 0, 4, 4).intersection(Rectangle(2, 2, 6, 6)),
+            Rectangle(2, 2, 4, 4))
+
+        # drugi prostokąt na NW
+        self.assertEqual(
+            Rectangle(0, -2, 4, 2).intersection(Rectangle(-2, 0, 2, 4)),
+            Rectangle(0, 0, 2, 2))
+
+        # drugi prostokąt na SE
+        self.assertEqual(
+            Rectangle(2, 2, 6, 6).intersection(Rectangle(0, 0, 4, 4)),
+            Rectangle(2, 2, 4, 4))
+
+        # drugi prostokąt na SW
+        self.assertEqual(
+            Rectangle(0, 2, 4, 6).intersection(Rectangle(2, 0, 6, 4)),
+            Rectangle(2, 2, 4, 4))
+
+    def test_cover(self):
+        # w tym samym miejscu
+        self.assertEqual(
+            Rectangle(0, 0, 4, 4).cover(Rectangle(0, 0, 4, 4)),
+            Rectangle(0, 0, 4, 4))
+
+        # drugi prostokąt na NE
+        self.assertEqual(
+            Rectangle(0, 0, 4, 4).cover(Rectangle(2, 2, 6, 6)),
+            Rectangle(0, 0, 6, 6))
+
+        # drugi prostokąt na NW
+        self.assertEqual(
+            Rectangle(0, -2, 4, 2).cover(Rectangle(-2, 0, 2, 4)),
+            Rectangle(-2, -2, 4, 4))
+
+        # drugi prostokąt na SE
+        self.assertEqual(
+            Rectangle(2, 2, 6, 6).cover(Rectangle(0, 0, 4, 4)),
+            Rectangle(0, 0, 6, 6))
+
+        # drugi prostokąt na SW
+        self.assertEqual(
+            Rectangle(0, 2, 4, 6).cover(Rectangle(2, 0, 6, 4)),
+            Rectangle(0, 0, 6, 6))
+
+    def test_make4(self):
         pass
 
     def tearDown(self):
