@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Zadanie 6.5
+Moduł z klasą Point.
 
 Wojciech Lepich
 """
