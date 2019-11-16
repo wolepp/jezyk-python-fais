@@ -17,8 +17,11 @@ class Frac:
         if y == 0:
             raise ValueError('Mianownik musi być różny od 0')
 
-        self.x = x
-        self.y = y
+        if y < 0:
+            x, y = -x, -y
+
+        self.x = x // gcd(x, y)
+        self.y = y // gcd(x, y)
 
     def __str__(self):         # zwraca "x/y" lub "x" dla y=1
         if self.y == 1:
@@ -27,17 +30,6 @@ class Frac:
 
     def __repr__(self):        # zwraca "Frac(x, y)"
         return "Frac({}, {})".format(self.x, self.y)
-
-    def simplify(self):
-        """Zwraca uproszczony ułamek."""
-
-        x = self.x // gcd(self.x, self.y)
-        y = self.y // gcd(self.x, self.y)
-
-        if y < 0:
-            x, y = -x, -y
-
-        return Frac(x, y)
 
     @staticmethod
     def _lcm(a, b):
@@ -53,7 +45,7 @@ class Frac:
         else:
             y = Frac._lcm(self.y, other.y)
             x = (self.x * y // self.y) + (other.x * y // other.y)
-        return Frac(x, y).simplify()
+        return Frac(x, y)
 
     __radd__ = __add__
 
@@ -66,7 +58,7 @@ class Frac:
         else: 
             y = Frac._lcm(self.y, other.y)
             x = (self.x * y // self.y) - (other.x * y // other.y)
-        return Frac(x, y).simplify()
+        return Frac(x, y)
 
     def __rsub__(self, other):  # int - frac, float - frac
         if isinstance(other, float):
@@ -75,10 +67,10 @@ class Frac:
 
     def __mul__(self, other):  # frac1 * frac2, frac * int, frac * float
         if isinstance(other, Frac):
-            return Frac(self.x * other.x, self.y * other.y).simplify()
+            return Frac(self.x * other.x, self.y * other.y)
         if isinstance(other, float):
             return self * Frac(*other.as_integer_ratio())
-        return Frac(self.x * other, self.y).simplify()
+        return Frac(self.x * other, self.y)
 
     __rmul__ = __mul__
 
@@ -147,14 +139,21 @@ class TestFrac(unittest.TestCase):
         pass
 
     def test___init__(self):
+        self.assertEqual(Frac(5), Frac(5, 1))
+        self.assertEqual(str(Frac(1, -2)), '-1/2')
         self.assertRaises(ValueError, lambda: Frac(4, 0))
 
     def test___str__(self):
         self.assertEqual(str(Frac(1, 2)), '1/2')
+        self.assertEqual(str(Frac(-1, -2)), '1/2')
         self.assertEqual(str(Frac(-1, 2)), '-1/2')
-        self.assertEqual(str(Frac(-1, -2)), '-1/-2')
-        self.assertEqual(str(Frac(1, -2)), '1/-2')
+        self.assertEqual(str(Frac(1, -2)), '-1/2')
+
+        # mianownik równy 1
         self.assertEqual(str(Frac(4, 1)), '4')
+
+        # upraszczanie
+        self.assertEqual(str(Frac(4, 6)), '2/3')
 
     def test___repr__(self):
         self.assertEqual(repr(Frac(1, 2)), 'Frac(1, 2)')
