@@ -61,7 +61,10 @@ class Rectangle:
         y1 = max(self.pt1.y, other.pt1.y)
         x2 = min(self.pt2.x, other.pt2.x)
         y2 = min(self.pt2.y, other.pt2.y)
-        return Rectangle(x1, y1, x2, y2)
+        try:
+            return Rectangle(x1, y1, x2, y2)
+        except ValueError:
+            raise ArithmeticError('Prostokaty sie nie przecinaja')
 
     def cover(self, other):    # prostąkąt nakrywający oba
         x1 = min(self.pt1.x, other.pt1.x)
@@ -117,10 +120,16 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(Rectangle(-4, -4, 6, 12).area(), 160)
 
     def test_move(self):
-        self.assertEqual(Rectangle(0, 0, 4, 2).move(3, 5), Rectangle(3, 5, 7, 7))
-        self.assertEqual(Rectangle(-4, -4, 6, 12).move(-6, 2), Rectangle(-10, -2, 0, 14))
+        self.assertEqual(Rectangle(0, 0, 4, 2).move(3, 5),
+                         Rectangle(3, 5, 7, 7))
+        self.assertEqual(Rectangle(-4, -4, 6, 12).move(-6, 2),
+                         Rectangle(-10, -2, 0, 14))
 
     def test_intersection(self):
+        # nieprzecinające się
+        self.assertRaises(ArithmeticError,
+                          lambda: Rectangle(0, 0, 1, 1).intersection(Rectangle(2, 2, 3, 3)))
+
         # w tym samym miejscu
         self.assertEqual(
             Rectangle(0, 0, 4, 4).intersection(Rectangle(0, 0, 4, 4)),
