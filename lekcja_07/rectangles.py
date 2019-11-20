@@ -23,8 +23,6 @@ class Rectangle:
         self.pt1 = Point(x1, y1)
         self.pt2 = Point(x2, y2)
 
-    def to_frac(
-
     def __str__(self):         # "[(x1, y1), (x2, y2)]"
         return "[{}, {}]".format(self.pt1, self.pt2)
 

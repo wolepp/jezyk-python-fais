@@ -32,59 +32,53 @@ class Frac:
         return "Frac({}, {})".format(self.x, self.y)
 
     @staticmethod
+    def to_frac(arg):
+        if isinstance(arg, Frac):
+            return arg
+        if isinstance(arg, int):
+            return Frac(arg, 1)
+        if isinstance(arg, float):
+            return Frac(*arg.as_integer_ratio())
+
+    @staticmethod
     def _lcm(a, b):
         """Najmniejsza wspólna wielokrotność a i b."""
         return abs(a * b) // gcd(a, b)
 
     def __add__(self, other):  # frac1 + frac2, frac + int, frac + float
-        if isinstance(other, int):
-            y = self.y
-            x = self.x + other * self.y
-        elif isinstance(other, float):
-            return self + Frac(*other.as_integer_ratio())
-        else:
-            y = Frac._lcm(self.y, other.y)
-            x = (self.x * y // self.y) + (other.x * y // other.y)
+        other_as_frac = Frac.to_frac(other)
+        y = Frac._lcm(self.y, other_as_frac.y)
+        x = (self.x * y // self.y) + (other_as_frac.x * y // other_as_frac.y)
         return Frac(x, y)
 
     __radd__ = __add__
 
     def __sub__(self, other):  # frac1 - frac2, frac - int, frac - float
-        if isinstance(other, int):
-            y = self.y
-            x = self.x - other * self.y
-        elif isinstance(other, float):
-            return self - Frac(*other.as_integer_ratio())
-        else: 
-            y = Frac._lcm(self.y, other.y)
-            x = (self.x * y // self.y) - (other.x * y // other.y)
+        other_as_frac = Frac.to_frac(other)
+        y = Frac._lcm(self.y, other_as_frac.y)
+        x = (self.x * y // self.y) - (other_as_frac.x * y // other_as_frac.y)
         return Frac(x, y)
 
     def __rsub__(self, other):  # int - frac, float - frac
-        if isinstance(other, float):
-            return Frac(*other.as_integer_ratio()) - self
-        return Frac(self.y * other - self.x, self.y)
+        other_as_frac = Frac.to_frac(other)
+        return -(self - other_as_frac)
+
+        # return Frac(self.y * other_as_frac - self.x, self.y)
 
     def __mul__(self, other):  # frac1 * frac2, frac * int, frac * float
-        if isinstance(other, Frac):
-            return Frac(self.x * other.x, self.y * other.y)
-        if isinstance(other, float):
-            return self * Frac(*other.as_integer_ratio())
-        return Frac(self.x * other, self.y)
+        other_as_frac = Frac.to_frac(other)
+        return Frac(self.x * other_as_frac.x, self.y * other_as_frac.y)
 
     __rmul__ = __mul__
 
-    def __truediv__(self, other):  # frac1 / frac2, frac / int
+    def __truediv__(self, other):  # frac1 / frac2, frac / int, frac / float
         if other == 0:
             raise ZeroDivisionError('Nie mozna dzielic przez zero')
 
-        if isinstance(other, int):
-            return self * Frac(1, other)
-        if isinstance(other, float):
-            return self * ~Frac(*other.as_integer_ratio())
-        return self * ~other
+        other_as_frac = Frac.to_frac(other)
+        return self * ~other_as_frac
 
-    def __rtruediv__(self, other): # int / frac
+    def __rtruediv__(self, other): # int / frac, float / frac
         return float(other * ~self)
 
     # operatory jednoargumentowe
