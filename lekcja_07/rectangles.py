@@ -23,6 +23,8 @@ class Rectangle:
         self.pt1 = Point(x1, y1)
         self.pt2 = Point(x2, y2)
 
+    def to_frac(
+
     def __str__(self):         # "[(x1, y1), (x2, y2)]"
         return "[{}, {}]".format(self.pt1, self.pt2)
 
@@ -32,7 +34,7 @@ class Rectangle:
             self.pt2.x, self.pt2.y)
 
     def __eq__(self, other):   # obsługa rect1 == rect2
-        return self.pt1 == other.pt1 and self.pt2 == other.pt2
+        return (self.pt1 == other.pt1 and self.pt2 == other.pt2)
 
     def __ne__(self, other):        # obsługa rect1 != rect2
         return not self == other
@@ -54,6 +56,9 @@ class Rectangle:
         return self
 
     def intersection(self, other):  # część wspólna prostokątów
+        # TODO: Jezeli się nie pokrywaja - zwrocic wyjatek!
+        # jezeli się nie pokrywają zwróć wyjątek
+
         x1 = max(self.pt1.x, other.pt1.x)
         y1 = max(self.pt1.y, other.pt1.y)
         x2 = min(self.pt2.x, other.pt2.x)
@@ -68,6 +73,15 @@ class Rectangle:
         return Rectangle(x1, y1, x2, y2)
 
     def make4(self):           # zwraca listę czterech mniejszych
+        # TODO:
+        #  _____________
+        # |      |      |
+        # |  1   |   2  |
+        # |      |      |
+        # |------+------|
+        # |      |      |
+        # |  4   |   3  |
+        # |______|______|
         pass
 
 # Kod testujący moduł.
