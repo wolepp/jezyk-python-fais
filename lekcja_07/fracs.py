@@ -63,8 +63,6 @@ class Frac:
         other_as_frac = Frac.to_frac(other)
         return -(self - other_as_frac)
 
-        # return Frac(self.y * other_as_frac - self.x, self.y)
-
     def __mul__(self, other):  # frac1 * frac2, frac * int, frac * float
         other_as_frac = Frac.to_frac(other)
         return Frac(self.x * other_as_frac.x, self.y * other_as_frac.y)
