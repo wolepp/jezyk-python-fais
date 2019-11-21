@@ -32,31 +32,32 @@ class Rectangle:
             self.pt2.x, self.pt2.y)
 
     def __eq__(self, other):   # obsługa rect1 == rect2
-        return (self.pt1 == other.pt1 and self.pt2 == other.pt2)
+        return self.pt1 == other.pt1 and self.pt2 == other.pt2
 
     def __ne__(self, other):        # obsługa rect1 != rect2
         return not self == other
 
     def center(self):          # zwraca środek prostokąta
+        """Zwraca punkt będący środkiem prostokąta."""
         x = (self.pt1.x + self.pt2.x) / 2
         y = (self.pt1.y + self.pt2.y) / 2
         return Point(x, y)
 
     def area(self):            # pole powierzchni
+        """Zwraca wielkość powierzchni prostokąta."""
         width = abs(self.pt1.x) + abs(self.pt2.x)
         length = abs(self.pt1.y) + abs(self.pt2.y)
         return width * length
 
     def move(self, x, y):      # przesunięcie o (x, y)
-        v = Point(x, y)
-        self.pt1 += v
-        self.pt2 += v
+        """Przesuwa prostokąt o zadane x i y."""
+        vector = Point(x, y)
+        self.pt1 += vector
+        self.pt2 += vector
         return self
 
     def intersection(self, other):  # część wspólna prostokątów
-        # TODO: Jezeli się nie pokrywaja - zwrocic wyjatek!
-        # jezeli się nie pokrywają zwróć wyjątek
-
+        """Zwraca prostokąt będący częścią wspolną prostokątów."""
         x1 = max(self.pt1.x, other.pt1.x)
         y1 = max(self.pt1.y, other.pt1.y)
         x2 = min(self.pt2.x, other.pt2.x)
@@ -67,23 +68,27 @@ class Rectangle:
             raise ArithmeticError('Prostokaty sie nie przecinaja')
 
     def cover(self, other):    # prostąkąt nakrywający oba
+        """Zwraca prostokąt pokrywający oba prostokąty."""
         x1 = min(self.pt1.x, other.pt1.x)
         y1 = min(self.pt1.y, other.pt1.y)
         x2 = max(self.pt2.x, other.pt2.x)
         y2 = max(self.pt2.y, other.pt2.y)
+
         return Rectangle(x1, y1, x2, y2)
 
     def make4(self):           # zwraca listę czterech mniejszych
-        # TODO:
-        #  _____________
-        # |      |      |
-        # |  1   |   2  |
-        # |      |      |
-        # |------+------|
-        # |      |      |
-        # |  4   |   3  |
-        # |______|______|
-        pass
+        """Zwraca 4 prostokąty z podzielenia prostokąta.
+        
+        W kolejności zgodnie z podziałem układu współrzędnych.
+        """
+        center = self.center()
+
+        upper_right = Rectangle(center.x, center.y, self.pt2.x, self.pt2.y)
+        upper_left = Rectangle(self.pt1.x, center.y, center.x, self.pt2.y)
+        bottom_left = Rectangle(self.pt1.x, self.pt1.y, center.x, center.y)
+        bottom_right = Rectangle(center.x, self.pt1.y, self.pt2.x, center.y)
+
+        return (upper_right, upper_left, bottom_left, bottom_right)
 
 # Kod testujący moduł.
 
