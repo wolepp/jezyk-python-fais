@@ -78,17 +78,17 @@ class Rectangle:
 
     def make4(self):           # zwraca listę czterech mniejszych
         """Zwraca 4 prostokąty z podzielenia prostokąta.
-        
+
         W kolejności zgodnie z podziałem układu współrzędnych.
         """
         center = self.center()
 
-        upper_right = Rectangle(center.x, center.y, self.pt2.x, self.pt2.y)
-        upper_left = Rectangle(self.pt1.x, center.y, center.x, self.pt2.y)
+        top_right = Rectangle(center.x, center.y, self.pt2.x, self.pt2.y)
+        top_left = Rectangle(self.pt1.x, center.y, center.x, self.pt2.y)
         bottom_left = Rectangle(self.pt1.x, self.pt1.y, center.x, center.y)
         bottom_right = Rectangle(center.x, self.pt1.y, self.pt2.x, center.y)
 
-        return (upper_right, upper_left, bottom_left, bottom_right)
+        return (top_right, top_left, bottom_left, bottom_right)
 
 # Kod testujący moduł.
 
@@ -187,7 +187,12 @@ class TestRectangle(unittest.TestCase):
             Rectangle(0, 0, 6, 6))
 
     def test_make4(self):
-        pass
+        top_right = Rectangle(2, 2, 4, 4)
+        top_left = Rectangle(0, 2, 2, 4)
+        bottom_left = Rectangle(0, 0, 2, 2)
+        bottom_right = Rectangle(2, 0, 4, 2)
+        rectangles = (top_right, top_left, bottom_left, bottom_right)
+        self.assertEqual(Rectangle(0, 0, 4, 4).make4(), rectangles)
 
     def tearDown(self):
         pass
