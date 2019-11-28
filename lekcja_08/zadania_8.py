@@ -10,7 +10,24 @@ import math
 
 def solve1(a, b, c):
     """Rozwiązywanie równania liniowego a x + b y + c = 0."""
-    pass
+    if a == 0 and b == 0:
+        print('a i b nie mogą być równocześnie równe 0')
+    elif b == 0:
+        print("b = 0 => ax + by + c = ax + c = 0")
+        print("prosta równoległa do osi OY, przecina oś OX w punkcie")
+        print("x = -c/a =", -c/a)
+    elif a == 0:
+        print("a = 0 => ax + by + c = by + c = 0")
+        print("prosta równoległa do osi OX, przecina oś OY w punkcie")
+        print("y = -c/b =", -c/b)
+    else: # a != 0 and b != 0
+        print("równanie kierunkowej prostej")
+        print("ax + by + c => y = -(a/b)*x - c/b")
+        print("prosta przecina oś OX w punkcie x = ", -c/a)
+        print("prosta przecina oś OY w punkcie y = ", -c/b)
+
+    if c == 0 and not (a == 0 and b == 0):
+        print("prosta przechodzi przez początek układu współrzędnych")
 
 
 def calc_pi(n=100):
