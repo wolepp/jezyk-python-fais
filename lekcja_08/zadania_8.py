@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Rozwiązania zadań z zestawu 8.
 
