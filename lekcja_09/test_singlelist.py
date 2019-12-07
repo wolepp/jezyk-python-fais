@@ -64,7 +64,7 @@ class TestSingleList(unittest.TestCase):
         alist.insert_tail(singlelist.Node('final tail'))
         alist.insert_tail(node_to_remove)
         removed_node = alist.remove_tail()
-        self.assertEqual(alist.tail.data, singlelist.Node('final tail').data)
+        self.assertEqual(alist.tail.data, 'final tail')
         self.assertEqual(removed_node, node_to_remove)
 
     def test_remove_tail_empty_list(self):
