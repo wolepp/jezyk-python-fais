@@ -81,36 +81,36 @@ class TestSingleList(unittest.TestCase):
         self.assertTrue(alist.tail is None)
 
     def test_merge(self):
-        alist1 = singlelist.SingleList()
-        alist2 = singlelist.SingleList()
+        self_list = singlelist.SingleList()
+        other_list = singlelist.SingleList()
         for x in range(1, 4):
-            alist1.insert_tail(singlelist.Node(x))
+            self_list.insert_tail(singlelist.Node(x))
         for y in range(4, 7):
-            alist2.insert_tail(singlelist.Node(y))
+            other_list.insert_tail(singlelist.Node(y))
 
-        alist1.merge(alist2)
-        self.assertEqual(alist1.count(), 6)
-        self.assertEqual(alist1.tail.data, 6)
+        self_list.merge(other_list)
+        self.assertEqual(self_list.count(), 6)
+        self.assertEqual(self_list.tail.data, 6)
 
     def test_merge_other_is_empty(self):
-        alist1 = singlelist.SingleList()
-        alist2 = singlelist.SingleList()
-        alist1.insert_tail(singlelist.Node(1))
-        alist1.insert_tail(singlelist.Node(2))
-        alist1.insert_tail(singlelist.Node(3))
-        tail = alist1.tail
-        alist1.merge(alist2)
-        self.assertEqual(alist1.tail, tail)
+        self_list = singlelist.SingleList()
+        other_list = singlelist.SingleList()
+        self_list.insert_tail(singlelist.Node(1))
+        self_list.insert_tail(singlelist.Node(2))
+        self_list.insert_tail(singlelist.Node(3))
+        tail = self_list.tail
+        self_list.merge(other_list)
+        self.assertEqual(self_list.tail, tail)
 
     def test_merge_self_is_empty(self):
-        alist1 = singlelist.SingleList()
-        alist2 = singlelist.SingleList()
-        alist2.insert_tail(singlelist.Node(1))
-        alist2.insert_tail(singlelist.Node(2))
-        alist2.insert_tail(singlelist.Node(3))
-        tail = alist2.tail
-        alist1.merge(alist2)
-        self.assertEqual(alist1.tail, tail)
+        self_list = singlelist.SingleList()
+        other_list = singlelist.SingleList()
+        other_list.insert_tail(singlelist.Node(1))
+        other_list.insert_tail(singlelist.Node(2))
+        other_list.insert_tail(singlelist.Node(3))
+        tail = other_list.tail
+        self_list.merge(other_list)
+        self.assertEqual(self_list.tail, tail)
 
     def test_clear(self):
         alist = singlelist.SingleList()
