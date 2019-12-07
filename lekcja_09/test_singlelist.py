@@ -8,8 +8,9 @@ import singlelist
 class TestSingleList(unittest.TestCase):
     def test_is_empty(self):
         self.assertTrue(singlelist.SingleList().is_empty())
-        self.assertFalse(singlelist.SingleList()
-                         .insert_head(singlelist.Node(10)))
+        alist = singlelist.SingleList()
+        alist.insert_head(singlelist.Node(10))
+        self.assertFalse(alist.is_empty())
 
     def test_count(self):
         alist = singlelist.SingleList()
