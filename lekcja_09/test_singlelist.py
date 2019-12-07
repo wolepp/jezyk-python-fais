@@ -137,7 +137,7 @@ class TestSingleList(unittest.TestCase):
         alist.insert_tail(singlelist.Node(6))
         self.assertEqual(alist.search(5), node)
 
-    def test_search_not_existing(self):
+    def test_search_non_existing(self):
         alist = singlelist.SingleList()
         alist.insert_tail(singlelist.Node(1))
         alist.insert_tail(singlelist.Node(2))
