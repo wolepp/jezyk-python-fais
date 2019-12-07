@@ -59,3 +59,45 @@ class DoubleList:
         node.next.prev = node.prev
         self.length -= 1
         return node
+
+    def find_max(self):
+        """Zwraca łącze do węzła z największym kluczem."""
+        if self.is_empty():
+            return None
+        max_node = node = self.nil.next
+        while node.next != self.nil:
+            node = node.next
+            if node.data > max_node.data:
+                max_node = node
+        return max_node
+
+    def find_min(self):
+        """Zwraca łącze do węzła z najmniejszym kluczem."""
+        if self.is_empty():
+            return None
+        min_node = node = self.nil.next
+        while node.next != self.nil:
+            node = node.next
+            if node.data < min_node.data:
+                min_node = node
+        return min_node
+
+    def remove(self, node):
+        """Usuwa wskazany węzeł z listy."""
+        if self.is_empty():
+            raise ValueError("pusta lista")
+        if node.prev and node.next:     # gdzieś w środku listy
+            node.prev.next = node.next
+            node.next.prev = node.prev
+            self.length -= 1
+        elif node.prev:                 # na końcu listy
+            self.remove_tail()
+        elif node.next:                 # na początku listy
+            self.remove_head()
+        node.next = node.prev = None
+
+    def clear(self):
+        """Czyszczenie listy."""
+        self.nil.next = self.nil
+        self.nil.prev = self.nil
+        self.length = 0
