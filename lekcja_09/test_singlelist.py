@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Moduł testujący klasę SingleList."""
 
 import unittest
@@ -51,11 +52,145 @@ class TestSingleList(unittest.TestCase):
     def test_remove_head_one_element_list(self):
         alist = singlelist.SingleList()
         alist.insert_head(singlelist.Node('the only one'))
-        self.assertTrue(alist.head is not alist.tail)
+        self.assertTrue(alist.head is alist.tail and alist.head is not None)
         alist.remove_head()
         self.assertTrue(alist.head is None)
         self.assertTrue(alist.tail is None)
 
+    def test_remove_tail(self):
+        alist = singlelist.SingleList()
+        node_to_remove = singlelist.Node('tail to remove')
+        alist.insert_tail(singlelist.Node('final tail'))
+        alist.insert_tail(node_to_remove)
+        removed_node = alist.remove_tail()
+        self.assertEqual(alist.tail.data, singlelist.Node('final tail').data)
+        self.assertEqual(removed_node, node_to_remove)
+
+    def test_remove_tail_empty_list(self):
+        alist = singlelist.SingleList()
+        with self.assertRaises(ValueError):
+            alist.remove_tail()
+
+    def test_remove_tail_one_element_list(self):
+        alist = singlelist.SingleList()
+        alist.insert_tail(singlelist.Node('the only one'))
+        self.assertTrue(alist.head is alist.tail and alist.head is not None)
+        alist.remove_tail()
+        self.assertTrue(alist.head is None)
+        self.assertTrue(alist.tail is None)
+
+    def test_merge(self):
+        alist1 = singlelist.SingleList()
+        alist2 = singlelist.SingleList()
+        for x in range(1, 4):
+            alist1.insert_tail(singlelist.Node(x))
+        for y in range(4, 7):
+            alist2.insert_tail(singlelist.Node(y))
+
+        alist1.merge(alist2)
+        self.assertEqual(alist1.count(), 6)
+        self.assertEqual(alist1.tail.data, 6)
+
+    def test_merge_other_is_empty(self):
+        alist1 = singlelist.SingleList()
+        alist2 = singlelist.SingleList()
+        alist1.insert_tail(singlelist.Node(1))
+        alist1.insert_tail(singlelist.Node(2))
+        alist1.insert_tail(singlelist.Node(3))
+        tail = alist1.tail
+        alist1.merge(alist2)
+        self.assertEqual(alist1.tail, tail)
+
+    def test_merge_self_is_empty(self):
+        alist1 = singlelist.SingleList()
+        alist2 = singlelist.SingleList()
+        alist2.insert_tail(singlelist.Node(1))
+        alist2.insert_tail(singlelist.Node(2))
+        alist2.insert_tail(singlelist.Node(3))
+        tail = alist2.tail
+        alist1.merge(alist2)
+        self.assertEqual(alist1.tail, tail)
+
+    def test_clear(self):
+        alist = singlelist.SingleList()
+        alist.insert_tail(singlelist.Node(1))
+        alist.insert_tail(singlelist.Node(2))
+        alist.insert_tail(singlelist.Node(3))
+        self.assertEqual(alist.count(), 3)
+        alist.clear()
+        self.assertEqual(alist.count(), 0)
+
+    def test_clear_empty_list(self):
+        alist = singlelist.SingleList()
+        alist.clear()
+        self.assertEqual(alist.count(), 0)
+
+    def test_search_existing(self):
+        alist = singlelist.SingleList()
+        node = singlelist.Node(5)
+        alist.insert_tail(singlelist.Node(1))
+        alist.insert_tail(singlelist.Node(2))
+        alist.insert_tail(singlelist.Node(3))
+        alist.insert_tail(node)
+        alist.insert_tail(singlelist.Node(9))
+        alist.insert_tail(singlelist.Node(6))
+        self.assertEqual(alist.search(5), node)
+
+    def test_search_not_existing(self):
+        alist = singlelist.SingleList()
+        alist.insert_tail(singlelist.Node(1))
+        alist.insert_tail(singlelist.Node(2))
+        alist.insert_tail(singlelist.Node(3))
+        alist.insert_tail(singlelist.Node(9))
+        alist.insert_tail(singlelist.Node(6))
+        self.assertIsNone(alist.search(5))
+
+    def test_find_min(self):
+        alist = singlelist.SingleList()
+        node = singlelist.Node(1)
+        alist.insert_tail(node)
+        alist.insert_tail(singlelist.Node(2))
+        alist.insert_tail(singlelist.Node(3))
+        alist.insert_tail(singlelist.Node(9))
+        alist.insert_tail(singlelist.Node(6))
+        self.assertEqual(alist.find_min(), node)
+
+    def test_find_min_empty_list(self):
+        alist = singlelist.SingleList()
+        self.assertIsNone(alist.find_min())
+
+    def test_find_max(self):
+        alist = singlelist.SingleList()
+        node = singlelist.Node(9)
+        alist.insert_tail(singlelist.Node(1))
+        alist.insert_tail(singlelist.Node(2))
+        alist.insert_tail(singlelist.Node(3))
+        alist.insert_tail(node)
+        alist.insert_tail(singlelist.Node(6))
+        self.assertEqual(alist.find_max(), node)
+
+    def test_find_max_empty_list(self):
+        alist = singlelist.SingleList()
+        self.assertIsNone(alist.find_max())
+
+    def test_reverse(self):
+        alist = singlelist.SingleList()
+        alist.insert_tail(singlelist.Node(1))
+        alist.insert_tail(singlelist.Node(2))
+        alist.insert_tail(singlelist.Node(3))
+        alist.insert_tail(singlelist.Node(9))
+        alist.insert_tail(singlelist.Node(6))
+        head, tail = alist.head, alist.tail
+        alist.reverse()
+        self.assertEqual(alist.head, tail)
+        self.assertEqual(alist.tail, head)
+
+    def test_reverse_empty(self):
+        alist = singlelist.SingleList()
+        head, tail = alist.head, alist.tail
+        alist.reverse()
+        self.assertEqual(alist.head, tail)
+        self.assertEqual(alist.tail, head)
 
 if __name__ == '__main__':
     unittest.main()
