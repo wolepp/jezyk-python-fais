@@ -20,6 +20,9 @@ class CyclicList:
     def is_empty(self):
         return self.head is None
 
+    def count(self):
+        return self.length
+
     def insert_head(self, node):
         if self.length == 0:
             self.head = self.tail = node
