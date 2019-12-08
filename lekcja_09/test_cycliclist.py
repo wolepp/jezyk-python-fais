@@ -9,6 +9,7 @@ class TestCyclicList(unittest.TestCase):
 
     def test_is_empty(self):
         self.assertTrue(cycliclist.CyclicList().is_empty())
+
         alist = cycliclist.CyclicList()
         alist.insert_head(cycliclist.Node(10))
         self.assertFalse(alist.is_empty())
@@ -29,7 +30,7 @@ class TestCyclicList(unittest.TestCase):
         self.assertEqual(alist.tail.data, 'tail')
         self.assertTrue(alist.tail is not alist.head)
 
-    def test_search_existing(self):
+    def test_search_existing_in_the_middle(self):
         alist = cycliclist.CyclicList()
         node = cycliclist.Node(5)
         alist.insert_tail(cycliclist.Node(1))
@@ -38,6 +39,28 @@ class TestCyclicList(unittest.TestCase):
         alist.insert_tail(node)
         alist.insert_tail(cycliclist.Node(9))
         alist.insert_tail(cycliclist.Node(6))
+        self.assertEqual(alist.search(5), node)
+
+    def test_search_existing_at_the_beginning(self):
+        alist = cycliclist.CyclicList()
+        node = cycliclist.Node(5)
+        alist.insert_tail(node)
+        alist.insert_tail(cycliclist.Node(1))
+        alist.insert_tail(cycliclist.Node(2))
+        alist.insert_tail(cycliclist.Node(3))
+        alist.insert_tail(cycliclist.Node(9))
+        alist.insert_tail(cycliclist.Node(6))
+        self.assertEqual(alist.search(5), node)
+
+    def test_search_existing_at_the_end(self):
+        alist = cycliclist.CyclicList()
+        node = cycliclist.Node(5)
+        alist.insert_tail(cycliclist.Node(1))
+        alist.insert_tail(cycliclist.Node(2))
+        alist.insert_tail(cycliclist.Node(3))
+        alist.insert_tail(cycliclist.Node(9))
+        alist.insert_tail(cycliclist.Node(6))
+        alist.insert_tail(node)
         self.assertEqual(alist.search(5), node)
 
     def test_search_non_existing(self):
@@ -57,8 +80,10 @@ class TestCyclicList(unittest.TestCase):
         alist.insert_tail(node)
         alist.insert_tail(cycliclist.Node(4))
         alist.insert_tail(cycliclist.Node(5))
+
         node_to_remove = alist.head.next.next
         self.assertEqual(alist.count(), 5)
+
         alist.remove(node_to_remove)
         self.assertNotEqual(alist.head.next.next, node_to_remove)
         self.assertEqual(alist.count(), 4)
@@ -71,8 +96,10 @@ class TestCyclicList(unittest.TestCase):
         alist.insert_tail(cycliclist.Node(3))
         alist.insert_tail(cycliclist.Node(4))
         alist.insert_tail(cycliclist.Node(5))
+
         node_to_remove = alist.head
         self.assertEqual(alist.count(), 5)
+
         alist.remove(node_to_remove)
         self.assertNotEqual(alist.head, node_to_remove)
         self.assertEqual(alist.count(), 4)
@@ -85,18 +112,32 @@ class TestCyclicList(unittest.TestCase):
         alist.insert_tail(cycliclist.Node(3))
         alist.insert_tail(cycliclist.Node(4))
         alist.insert_tail(node)
+
         node_to_remove = alist.head.next.next.next.next
         self.assertEqual(alist.count(), 5)
+
         alist.remove(node_to_remove)
         self.assertNotEqual(alist.head.next.next.next.next, node_to_remove)
         self.assertEqual(alist.count(), 4)
 
+    def test_remove_the_only_one(self):
+        alist = cycliclist.CyclicList()
+        node = cycliclist.Node('the only one')
+        alist.insert_tail(node)
+
+        node_to_remove = alist.head
+        self.assertEqual(alist.count(), 1)
+
+        alist.remove(node_to_remove)
+        self.assertNotEqual(alist.head, node_to_remove)
+        self.assertEqual(alist.count(), 0)
+
     def test_remove_non_existing(self):
         alist = cycliclist.CyclicList()
         alist.insert_tail(cycliclist.Node('exists'))
-        node = cycliclist.Node('does not exist')
+        non_existing = cycliclist.Node('does not exist')
         self.assertEqual(alist.count(), 1)
-        alist.remove(node)
+        alist.remove(non_existing)
         self.assertEqual(alist.count(), 1)
 
     def test_remove_from_empty_list(self):
@@ -115,7 +156,7 @@ class TestCyclicList(unittest.TestCase):
 
         self_list.merge(other_list)
         self.assertEqual(self_list.count(), 6)
-        self.assertEqual(self_list.tail.data, 6)
+        self.assertEqual(self_list.tail, other_list.tail)
 
     def test_merge_other_is_empty(self):
         self_list = cycliclist.CyclicList()
@@ -123,9 +164,10 @@ class TestCyclicList(unittest.TestCase):
         self_list.insert_tail(cycliclist.Node(1))
         self_list.insert_tail(cycliclist.Node(2))
         self_list.insert_tail(cycliclist.Node(3))
-        tail = self_list.tail
+
+        orig_self_tail = self_list.tail
         self_list.merge(other_list)
-        self.assertEqual(self_list.tail, tail)
+        self.assertEqual(self_list.tail, orig_self_tail)
 
     def test_merge_self_is_empty(self):
         self_list = cycliclist.CyclicList()
@@ -133,9 +175,10 @@ class TestCyclicList(unittest.TestCase):
         other_list.insert_tail(cycliclist.Node(1))
         other_list.insert_tail(cycliclist.Node(2))
         other_list.insert_tail(cycliclist.Node(3))
-        tail = other_list.tail
+
         self_list.merge(other_list)
-        self.assertEqual(self_list.tail, tail)
+        self.assertEqual(self_list.head, other_list.head)
+        self.assertEqual(self_list.tail, other_list.tail)
 
     def test_clear(self):
         alist = cycliclist.CyclicList()
@@ -143,14 +186,18 @@ class TestCyclicList(unittest.TestCase):
         alist.insert_tail(cycliclist.Node(2))
         alist.insert_tail(cycliclist.Node(3))
         self.assertEqual(alist.count(), 3)
+
         alist.clear()
         self.assertEqual(alist.count(), 0)
         self.assertEqual(alist.head, alist.tail)
+        self.assertIsNone(alist.head)
 
     def test_clear_empty_list(self):
         alist = cycliclist.CyclicList()
         alist.clear()
         self.assertEqual(alist.count(), 0)
+        self.assertEqual(alist.head, alist.tail)
+        self.assertIsNone(alist.head)
 
 if __name__ == '__main__':
     unittest.main()
