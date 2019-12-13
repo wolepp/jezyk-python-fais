@@ -33,8 +33,8 @@ class Stack:
     def pop(self):
         if self.is_empty():
             raise Exception('Stos jest pusty')
+        self.index -= 1
         item = self.items[self.index]
         self.items[self.index] = None
-        self.index -= 1
         self.exists[item] = 0
         return item
