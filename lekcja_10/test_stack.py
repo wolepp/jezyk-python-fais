@@ -11,6 +11,10 @@ class TestStack(unittest.TestCase):
         self.full_stack.push(1)
         self.full_stack.push(2)
 
+    def test_str(self):
+        self.assertEqual(str(self.empty_stack), '[]')
+        self.assertEqual(str(self.full_stack), '[0, 1, 2]')
+
     def test_is_empty(self):
         self.assertTrue(self.empty_stack.is_empty())
 
