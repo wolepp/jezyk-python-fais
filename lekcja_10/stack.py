@@ -18,15 +18,13 @@ class Stack:
         return not sum(self.exists)
 
     def is_full(self):
-        return self.index == self.size-1
+        return self.index == self.size
 
     def push(self, item):
         if not 0 <= item <= self.size-1:
             raise ValueError('Wartość musi być liczbą całkowitą z przedziału [0, '+self.size-1+']')
         if self.exists[item]:
             return
-        if self.is_full():
-            raise Exception('Stos jest pełny')
         self.items[self.index] = item
         self.exists[item] = 1
         self.index += 1
