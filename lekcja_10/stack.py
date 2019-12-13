@@ -22,7 +22,8 @@ class Stack:
 
     def push(self, item):
         if not 0 <= item <= self.size-1:
-            raise ValueError('Wartość musi być liczbą całkowitą z przedziału [0, '+self.size-1+']')
+            raise ValueError(
+                'Wartość musi być liczbą całkowitą z przedziału [0, '+str(self.size-1)+']')
         if self.exists[item]:
             return
         self.items[self.index] = item
