@@ -11,6 +11,14 @@ class TestStack(unittest.TestCase):
         self.full_stack.push(1)
         self.full_stack.push(2)
 
+    def test_init(self):
+        with self.assertRaises(ValueError):
+            S = stack.Stack(0)
+        with self.assertRaises(ValueError):
+            S = stack.Stack(-4)
+        with self.assertRaises(ValueError):
+            S = stack.Stack('ojej')
+
     def test_str(self):
         self.assertEqual(str(self.empty_stack), '[]')
         self.assertEqual(str(self.full_stack), '[0, 1, 2]')

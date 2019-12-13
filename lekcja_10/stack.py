@@ -6,6 +6,10 @@ class Stack:
     """
 
     def __init__(self, size):
+        if not isinstance(size, int):
+            raise ValueError('size musi być typu int')
+        if size <= 0:
+            raise ValueError('size musi być większe od 0')
         self.items = size * [None]
         self.exists = size * [0]
         self.size = size
