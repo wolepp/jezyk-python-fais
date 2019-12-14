@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+"""Moduł testujący implementację stosu."""
+
 import unittest
 import stack
 
