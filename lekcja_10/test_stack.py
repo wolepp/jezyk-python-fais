@@ -13,11 +13,11 @@ class TestStack(unittest.TestCase):
 
     def test_init(self):
         with self.assertRaises(ValueError):
-            S = stack.Stack(0)
+            stack.Stack(0)
         with self.assertRaises(ValueError):
-            S = stack.Stack(-4)
+            stack.Stack(-4)
         with self.assertRaises(ValueError):
-            S = stack.Stack('ojej')
+            stack.Stack('ojej')
 
     def test_str(self):
         self.assertEqual(str(self.empty_stack), '[]')
