@@ -16,8 +16,8 @@ class CyclicList:
         self.head = None
         self.tail = self.head
         # przechowuje tail, aby zmniejszyc zlozonosc obliczeniowa wielu dzialan
-        # np. insert_head jest wtedy O(1), zamiast O(N) - nie trzeba dochodzic
-        # do wezla przed head
+        # np. insert_tail jest wtedy O(1), zamiast O(N) - nie trzeba dochodzic
+        # do wezla poprzedzajacego tail
         self.length = 0
 
     def is_empty(self):
@@ -29,7 +29,7 @@ class CyclicList:
     def insert_head(self, node):
         if self.length == 0:
             self.head = self.tail = node
-            node.next = node
+            self.head.next = self.head
         else:
             node.next = self.head
             self.tail.next = node
@@ -87,6 +87,7 @@ class CyclicList:
         self.tail = other.tail
         self.tail.next = self.head
         self.length += other.count()
+        other.clear()
 
     def clear(self):            # czyszczenie listy
         self.head = None

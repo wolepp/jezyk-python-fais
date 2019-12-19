@@ -154,9 +154,13 @@ class TestCyclicList(unittest.TestCase):
         for y in range(4, 7):
             other_list.insert_tail(cycliclist.Node(y))
 
+        other_tail = other_list.tail
         self_list.merge(other_list)
+
         self.assertEqual(self_list.count(), 6)
-        self.assertEqual(self_list.tail, other_list.tail)
+        self.assertEqual(self_list.tail, other_tail)
+
+        self.assertTrue(other_list.is_empty())
 
     def test_merge_other_is_empty(self):
         self_list = cycliclist.CyclicList()
@@ -176,9 +180,12 @@ class TestCyclicList(unittest.TestCase):
         other_list.insert_tail(cycliclist.Node(2))
         other_list.insert_tail(cycliclist.Node(3))
 
+        other_head = other_list.head
+        other_tail = other_list.tail
+
         self_list.merge(other_list)
-        self.assertEqual(self_list.head, other_list.head)
-        self.assertEqual(self_list.tail, other_list.tail)
+        self.assertEqual(self_list.head, other_head)
+        self.assertEqual(self_list.tail, other_tail)
 
     def test_clear(self):
         alist = cycliclist.CyclicList()
