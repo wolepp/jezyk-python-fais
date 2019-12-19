@@ -16,6 +16,21 @@ class SingleList:
         self.length = 0         # nie trzeba obliczać za każdym razem
         self.head = None
         self.tail = None
+        self.current = None
+
+    def __iter__(self):
+        self.current = self.head
+        return self
+
+    def __next__(self):
+        current = self.current
+        if current:
+            self.current = self.current.next
+            return current
+        raise StopIteration
+        
+    def __str__(self):
+        return '[' + ', '.join([str(node) for node in self]) + ']'
 
     def is_empty(self):
         return self.length == 0
