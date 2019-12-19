@@ -83,7 +83,11 @@ class DoubleList:
         return min_node
 
     def remove(self, node):
-        """Usuwa wskazany węzeł z listy."""
+        """
+        Usuwa wskazany węzeł z listy.
+        
+        Nie sprawdza czy node faktycznie jest elementem listy.
+        """
         if self.is_empty():
             raise ValueError("pusta lista")
 
