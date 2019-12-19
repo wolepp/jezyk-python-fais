@@ -92,6 +92,8 @@ class TestSingleList(unittest.TestCase):
         self.assertEqual(self_list.count(), 6)
         self.assertEqual(self_list.tail.data, 6)
 
+        self.assertTrue(other_list.is_empty())
+
     def test_merge_other_is_empty(self):
         self_list = singlelist.SingleList()
         other_list = singlelist.SingleList()

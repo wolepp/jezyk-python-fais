@@ -91,6 +91,8 @@ class SingleList:
             self.tail.next = other.head
         self.tail = other.tail
         self.length += other.count()
+        # czyszczenie listy other
+        other.clear()
 
     def clear(self):            # czyszczenie listy
         """Czyści listę."""
