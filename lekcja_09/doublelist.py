@@ -86,13 +86,15 @@ class DoubleList:
         """Usuwa wskazany węzeł z listy."""
         if self.is_empty():
             raise ValueError("pusta lista")
-        if node.prev and node.next:     # gdzieś w środku listy
+
+        # gdzieś w środku listy
+        if node.prev is not self.nil and node.next is not self.nil:
             node.prev.next = node.next
             node.next.prev = node.prev
             self.length -= 1
-        elif node.prev:                 # na końcu listy
+        elif node.next is self.nil:                 # na końcu listy
             self.remove_tail()
-        elif node.next:                 # na początku listy
+        elif node.prev is self.nil:                 # na początku listy
             self.remove_head()
         node.next = node.prev = None
 
