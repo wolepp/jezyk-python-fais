@@ -11,6 +11,7 @@ def random_integer_list(N):
     """
     Zwraca nieposortowaną listę liczb całkowitych od 0 do N-1.
     """
+    random_integer_list.s = 'Liczby losowe'
 
     L = []
     for i in range(N):
@@ -23,6 +24,7 @@ def nearly_sorted_integer_list(N):
     """
     Zwraca prawie posortowaną listę liczb całkowitych od 0 do N-1.
     """
+    nearly_sorted_integer_list.s = 'Liczby prawie posortowane'
 
     if N >= 100:
         x = N // 30
@@ -44,6 +46,8 @@ def nearly_sorted_integer_list_reversed(N):
     """
     Zwraca prawie posortowaną odwrotną listę liczb całkowitych od 0 do N-1.
     """
+    nearly_sorted_integer_list_reversed.s = 'Liczby prawie posortowane odwrotnie'
+
     L = nearly_sorted_integer_list(N)
     L.reverse()
     return L
@@ -53,6 +57,8 @@ def random_gauss_float_list(N):
     """
     Zwraca listę N liczb float w losowej kolejności o rozkładzie gaussowskim.
     """
+    random_gauss_float_list.s = 'Losowe liczby float, rozkład gaussowski'
+
     L = []
     for i in range(N):
         L.append(random.gauss(0, 1))
@@ -64,6 +70,8 @@ def random_repeatable_integer_list(N):
     Zwraca listę N liczb całkowitych należących do zbioru k-elementowego, 
     k < N w losowej kolejności.
     """
+    random_repeatable_integer_list.s = 'Losowe powtarzające się liczby.'
+
     k = int(sqrt(N))
     L = []
     for i in range(N):
@@ -90,5 +98,6 @@ if __name__ == "__main__":
     for funkcja in FUNKCJE:
         for rozmiar in ROZMIARY:
             pyplot.title('{}, N={}'.format(funkcja.s, str(rozmiar)))
-            pyplot.plot(range(rozmiar), funkcja(rozmiar), '.')
+            # pyplot.plot(range(rozmiar), funkcja(rozmiar), '.')
+            pyplot.bar(range(rozmiar), funkcja(rozmiar))
             pyplot.show()
