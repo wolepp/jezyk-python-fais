@@ -13,9 +13,7 @@ def random_integer_list(N):
     """
     random_integer_list.s = 'Liczby losowe'
 
-    L = []
-    for i in range(N):
-        L.append(i)
+    L = list(range(N))
     random.shuffle(L)
     return L
 
@@ -86,7 +84,11 @@ if __name__ == "__main__":
     random_gauss_float_list.s = 'Random gauss float list'
     random_repeatable_integer_list.s = 'Random repeatable integer list'
 
-    ROZMIARY = [9, 58, 250]
+    ROZMIARY = [
+        9,
+        58,
+        250
+    ]
     FUNKCJE = [
         random_integer_list,
         nearly_sorted_integer_list,
@@ -95,9 +97,13 @@ if __name__ == "__main__":
         random_repeatable_integer_list
     ]
 
+    # Uwaga, pokazywanych jest 15 wykresów, jeden po drugim.
     for funkcja in FUNKCJE:
         for rozmiar in ROZMIARY:
             pyplot.title('{}, N={}'.format(funkcja.s, str(rozmiar)))
+
+            # pyplot.plot - kropki, pyplot.bar - kreski
             # pyplot.plot(range(rozmiar), funkcja(rozmiar), '.')
             pyplot.bar(range(rozmiar), funkcja(rozmiar))
+
             pyplot.show()
