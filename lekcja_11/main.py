@@ -1,19 +1,23 @@
 """
 Zadanie 11.4 - porównanie czasów działania algorytmów sortowania.
 
+Uwaga - uruchomienie przy ilości próbek>=3 może trwać kilka minut.
+
 Ze względu na ilość czasu potrzebnego na posortowanie algorytmami
 klasy O(N^2) - te uruchamiane są dla N <= 10**4. Tylko dla insertsort
 uruchomiłem N = 10**5. Czas sortowania wyniósł 602 sekundy.
 """
 import timeit
-import matplotlib.pyplot as plt
 from operator import itemgetter
+from itertools import groupby
 from math import log10
+import matplotlib.pyplot as plt
 import sort_test_data as lists
 import sort
 
 
 def print_results(wyniki, key=None):
+    """Funkcja do wypisania wyników na ekran terminala."""
     if key is None:
         key = itemgetter('N', 'time')
     wyniki.sort(key=key)
@@ -40,19 +44,37 @@ def print_results(wyniki, key=None):
         print(row)
 
 
+def plot(wyniki):
+    """Funkcja do wyrysowania wykresów z użyciem Matplotlib."""
+    wyniki.sort(key=itemgetter('N', 'time'))
+
+    for group_key, group in groupby(wyniki, itemgetter('N')):
+        potega = log10(group_key)
+        plt.xticks(rotation=45)
+        plt.ylabel('sekundy')
+        plt.title("N = 10^{:n}".format(potega))
+        for result in group:
+            plt.bar(result.get('name'), result.get('time'))
+
+        plt.show()  # wyświetlenie wykresu
+        # zapisanie do pliku png, np. N_1E4 dla N = 10^4
+        # filename = "N_1E{:n}.png".format(potega)
+        # plt.savefig(filename)
+
+
 if __name__ == "__main__":
     lista = lists.random_integer_list
     wyniki = []
+    ILOSC_PROBEK = 3
 
     # Quicksort, Mergesort i Timsort
     for N in [10**2, 10**3, 10**4, 10**5, 10**6]:
-        ilosc_probek = 1
         czas_mergesort = timeit.timeit(lambda: sort.mergesort(lista(N), 0, N-1),
-                                       number=ilosc_probek) / ilosc_probek
+                                       number=ILOSC_PROBEK) / ILOSC_PROBEK
         czas_quicksort = timeit.timeit(lambda: sort.quicksort(lista(N), 0, N-1),
-                                       number=ilosc_probek) / ilosc_probek
+                                       number=ILOSC_PROBEK) / ILOSC_PROBEK
         czas_timsort = timeit.timeit(lambda: lista(N).sort(),
-                                     number=ilosc_probek) / ilosc_probek
+                                     number=ILOSC_PROBEK) / ILOSC_PROBEK
         wyniki.append({
             "name": "quicksort",
             "N": N,
@@ -63,18 +85,16 @@ if __name__ == "__main__":
 
     # Selectsort, Insertsort, Bubblesort, Shakersort i Shellsort
     for N in [10**2, 10**3, 10**4]:
-        ilosc_probek = 1
-
         czas_selectsort = timeit.timeit(lambda: sort.selectsort(lista(N), 0, N-1),
-                                        number=ilosc_probek) / ilosc_probek
+                                        number=ILOSC_PROBEK) / ILOSC_PROBEK
         czas_insertsort = timeit.timeit(lambda: sort.insertsort(lista(N), 0, N-1),
-                                        number=ilosc_probek) / ilosc_probek
+                                        number=ILOSC_PROBEK) / ILOSC_PROBEK
         czas_bubblesort = timeit.timeit(lambda: sort.bubblesort(lista(N), 0, N-1),
-                                        number=ilosc_probek) / ilosc_probek
+                                        number=ILOSC_PROBEK) / ILOSC_PROBEK
         czas_shakersort = timeit.timeit(lambda: sort.shakersort(lista(N), 0, N-1),
-                                        number=ilosc_probek) / ilosc_probek
+                                        number=ILOSC_PROBEK) / ILOSC_PROBEK
         czas_shellsort = timeit.timeit(lambda: sort.shellsort(lista(N), 0, N-1),
-                                       number=ilosc_probek) / ilosc_probek
+                                       number=ILOSC_PROBEK) / ILOSC_PROBEK
 
         wyniki.append({"name": "selectsort", "N": N, "time": czas_selectsort})
         wyniki.append({"name": "insertsort", "N": N, "time": czas_insertsort})
@@ -82,13 +102,7 @@ if __name__ == "__main__":
         wyniki.append({"name": "shakersort", "N": N, "time": czas_shakersort})
         wyniki.append({"name": "shellsort", "N": N, "time": czas_shellsort})
 
-    #      Insertsort dla N=10**5
-    # czas_insertsort_duzeN = timeit.timeit(
-    #     lambda: sort.insertsort(lista(10**5), 0, 10**5-1), number=1)
-    # wyniki.append({
-    #     "name": "insertsort",
-    #     "N": 10**5,
-    #     "time": czas_insertsort_duzeN
-    #     })
-
     print_results(wyniki)
+
+    # można też wyrysować wykresy przy użyciu Matplotlib
+    # plot(wyniki)
