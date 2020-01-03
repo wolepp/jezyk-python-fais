@@ -31,13 +31,7 @@ def nearly_sorted_integer_list(N):
     else:
         x = 4
 
-    L = []
-    for i in range(N):
-        if i % x == 0:
-            L.append(random.randrange(N))
-        else:
-            L.append(i)
-    return L
+    return [random.randrange(N) if n % x == 0 else n for n in range(N)]
 
 
 def nearly_sorted_integer_list_reversed(N):
@@ -57,10 +51,7 @@ def random_gauss_float_list(N):
     """
     random_gauss_float_list.s = 'Losowe liczby float, rozkład gaussowski'
 
-    L = []
-    for i in range(N):
-        L.append(random.gauss(0, 1))
-    return L
+    return [random.gauss(0, 1) for n in range(N)]
 
 
 def random_repeatable_integer_list(N):
@@ -71,10 +62,7 @@ def random_repeatable_integer_list(N):
     random_repeatable_integer_list.s = 'Losowe powtarzające się liczby.'
 
     k = int(sqrt(N))
-    L = []
-    for i in range(N):
-        L.append(random.randrange(k))
-    return L
+    return [random.randrange(k) for n in range(N)]
 
 
 if __name__ == "__main__":
