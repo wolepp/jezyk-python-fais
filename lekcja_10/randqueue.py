@@ -17,7 +17,8 @@ class RandomQueue:
         if self.is_empty():
             raise Exception('Kolejka jest pusta')
         idx = random.randrange(len(self.items))
-        return self.items.pop(idx)
+        self.items[idx], self.items[-1] = self.items[-1], self.items[idx]
+        return self.items.pop()
 
     def is_empty(self):
         return not self.items

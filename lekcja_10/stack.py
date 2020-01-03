@@ -20,7 +20,8 @@ class Stack:
 
     def is_empty(self):
         # return not sum(self.exists)   # nawet w najgorszym przypadku wolniejsze niż any
-        return not any(self.exists)
+        # return not any(self.exists)   # przekombinowane podejście
+        return self.index == 0
 
     def is_full(self):
         return self.index == self.size
