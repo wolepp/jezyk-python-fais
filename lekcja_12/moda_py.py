@@ -5,8 +5,6 @@ Metoda znajdowania mody (dominanty) w zbiorze nieuporządkowanym
 z wykorzystaniem słownika Pythona.
 """
 import unittest
-import timeit
-from operator import itemgetter
 
 
 def moda_py(L, left, right):
