@@ -10,9 +10,6 @@ def floydwarshall(graph):
     nodes = graphutil.list_nodes(graph)
     edges = graphutil.list_edges(graph)
 
-    # ilość wierzchołków
-    n = len(nodes)
-
     # macierz d[n*n], każda wartość zainicjalizowana wartością nieskończoność
     # w postaci słownika
     d = {}
@@ -37,7 +34,7 @@ def floydwarshall(graph):
 
 if __name__ == "__main__":
 
-    graph = {
+    graf = {
         "A": {"B": 1, "C": 2},
         "B": {"C": 3, "D": 5, "F": 8},
         "C": {"A": 3, "D": 1},
@@ -46,8 +43,8 @@ if __name__ == "__main__":
         "F": {"B": 1, "E": 3}
     }
 
-    # d = floydwarshall(graph)
-    # graphutil.print_graph(d)
+    sciezki = floydwarshall(graf)
+    graphutil.print_graph(sciezki)
 
     randomowy = graphutil.random_graph(4, 30)
     floyd = floydwarshall(randomowy)
