@@ -4,6 +4,8 @@ Moduł zawierający funkcje pomagające budować właściwy graf.
 Graf typu dict+dict
 """
 
+from random import randrange
+
 
 def add_node(graph, node):
     """Wstawia wierzchołek do grafu."""
@@ -44,3 +46,25 @@ def print_graph(graph):
         for target in graph[source]:
             print("{}({})".format(target, graph[source][target]), end=" ")
         print()  # nowa linia
+
+
+def random_graph(size, max_weight=10, keys=None):
+    if keys is None:
+        keys = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+                'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+        keys = keys[:size]
+
+    size = len(keys)
+
+    graph = {}
+    for source in keys:
+        graph[source] = {}
+        for i in range(size):
+            target = keys[randrange(size)]
+            # wykluczone krawędzie do źródłowego węzła
+            if target == source:
+                continue
+            weight = randrange(1, max_weight)
+            graph[source][target] = weight
+
+    return graph
