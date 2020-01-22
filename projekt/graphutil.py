@@ -49,12 +49,19 @@ def print_graph(graph):
 
 
 def random_graph(size, max_weight=10, keys=None):
+    """Tworzy losowy graf o alfabetycznych etykietach.
+
+    Parametr size oznacza ilość wierzchołków.
+    Parametr max_weight (opcjonalny) oznacza największą możliwą wagę krawędzi.
+    Parametr keys (opcjonalny) to własne etykiety wierzchołków.
+    """
     if keys is None:
         keys = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
                 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-        keys = keys[:size]
 
-    size = len(keys)
+    if len(keys) < size:
+        raise ValueError('Zbyt mała ilość etykiet')
+    keys = keys[:size]
 
     graph = {}
     for source in keys:

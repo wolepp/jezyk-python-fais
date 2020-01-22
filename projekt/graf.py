@@ -8,6 +8,11 @@ import graphutil
 
 
 def floydwarshall(graph):
+    """
+    Algorytm Floyda-Warshalla, zwraca macierz kosztów dojścia.
+
+    Przyjmuje graf typu dict+dict.
+    """
     nodes = graphutil.list_nodes(graph)
     edges = graphutil.list_edges(graph)
 
