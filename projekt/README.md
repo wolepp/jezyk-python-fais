@@ -8,13 +8,13 @@ Algorytm F-W jest przykładem programowania dynamicznego. Służy do rozwiązani
 
 Algorytm F-W korzysta z tego, że jeśli najkrótsza ścieżka pomiędzy wierzchołkami $v_1$ i $v_2$ prowadzi przez wierzchołek $u$, to ta ścieżka jest połączeniem najkrótszych ścieżek prowadzących z $v_1$ do $u$ oraz tych od $u$ do $v_2$.
 
-Aktualne wyniki zapisywane są na bieżąco do macierzy `d`, to jest tablicy $n\times n$ ($n$ to ilość wierzchołków). Tablica ta jest zainicjalizowana wartościami $\infty$ (w kodzie jest to `inf` z modułu `math`), a następnie wartości na diagonali są ustawiane na $0$.
+Aktualne wyniki zapisywane są na bieżąco do macierzy `d`, to jest tablicy $n\times n$ ($n$ to ilość wierzchołków). Tablica ta jest wypełniona wartościami $\infty$ (w kodzie jest to `inf` z modułu `math`), a następnie wartości na diagonali są ustawiane na $0$.
 
 Algorytm porównuje wszystkie możliwe ścieżki pomiędzy każdą parą wierzchołków. Używane są trzy zagnieżdzone pętle `for`, każda przechodzi przez wszystkie wierzchołki grafu. Wierzchołki te nazwijmy $i, j, k$ (w kodzie nazwy te zmienione są na `source`, `target` oraz `middle`). Dla każdego wierzchołka $i$ porównywana jest długość ścieżki idąca bezpośrednio (o ile taka istnieje) do wierzchołka $j$ z tą, która przechodzi przez wierzchołek $k$. Jeżeli ta druga jest krótsza, do tablicy na pozycji $d_{i,j}$ (`d[source][target]`) wpisywana jest suma wag ścieżek $(i, k)$ i $(k, j)$.
 
 ## Złożoność
 
-Najbardziej na czas działania algorytmu wpływa potórjnie zagnieżdżona pętla `for`. Kod wewnątrz najbardziej zagnieżdzonej pętli:
+Na czas działania algorytmu najbardziej wpływa potórjnie zagnieżdżona pętla `for`. Kod wewnątrz najbardziej zagnieżdzonej pętli:
 
 ```Python
 new_weight = d[source][middle] + d[middle][target]
