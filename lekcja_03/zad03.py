@@ -1,13 +1,17 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+
 def z3_1():
+    """Sprawdzanie poprawności kodu"""
+
     # Ten kod jest poprawny skladniowo zarowno w python2 jak i python3
-    x = 2 ; y = 3 ;
+    x = 2
+    y = 3
     if (x > y):
-        result = x;
+        result = x
     else:
-        result = y;
+        result = y
     assert result == 3
 
     # Kod linijke nizej jest niepoprawny
@@ -20,17 +24,22 @@ def z3_1():
     # Kod poprawny w python2, w python3 trzeba odpowiednio zastosowac print().
     # Poprawny, zakomentowany w celu kompatybilnosci
     # for i in "axby": print ord(i) if ord(i) < 100 else i
-    for i in "axby": print(ord(i) if ord(i) < 100 else i)
+    for i in "axby":
+        print(ord(i) if ord(i) < 100 else i)
+
 
 def z3_2():
-    L = [3, 5, 4] ; L = L.sort()
+    """Co jest błędnego w kodzie?"""
+
+    L = [3, 5, 4]
+    L = L.sort()
     # Powyzszy kod, dziala, jest semantycznie poprawny, ale dziala inaczej
     # niz mozna podejrzewac. Metoda sort() klasy list sortuje ja i zwraca None,
     # ktore jest nastepnie przypisane do L. Wywolujac type(L) otrzymujemy
     # <class 'NoneType'>
     assert type(L) == type(None)
 
-    # x, y = 1, 2, 3 
+    # x, y = 1, 2, 3
     # Powyzszy kod jest niepoprawny ze wzgledu na inna ilosc zmiennych po
     # lewej stronie przypisania i wyrazen po prawej. Wyjatek ValueError
 
@@ -46,7 +55,7 @@ def z3_2():
 
     # X = "abc" ; X.append("d")
     # X jest stringiem, ktory nie ma metody append, wyjatek AttributeError
-    
+
     # map(pow, range(8))
     # Funkcja pow wymaga podania dwoch argumentow, a podany jest tylko jeden:
     # range(8). Przykladowy dzialajacy kod:
@@ -55,12 +64,22 @@ def z3_2():
     for (x, i) in zip(L, M):
         assert x == i
 
+
 def z3_3():
+    """Wypisywanie liczb od 0 do 30 w pętli bez tych podzielnych przez 3"""
+
     for i in range(31):
         if i % 3 == 0:
             print(i)
 
+
 def z3_4():
+    """Pobiera w pętli liczbę i wypisuje ją oraz jej trzecią potęgę.
+
+    Wykonuje się dopóki nie zostanie wpisane z klawiatury 'stop'.
+    Jeżeli zostanie podany inny napis niż 'stop', wypisuje komunikat o błędzie.
+    """
+
     while True:
         x = input('Wpisz liczbe rzeczywista: ')
         try:
@@ -72,7 +91,15 @@ def z3_4():
             else:
                 print('Nie podano liczby rzeczywistej')
 
+
 def z3_5():
+    """Rysuje miarkę o zadanej długości.
+
+    Przykładowa miarka o długości 5:
+    |....|....|....|....|....|
+    0    1    2    3    4    5
+    """
+
     length = int(input('podaj dlugosc miarki: '))
     miarka = ('|....' * length) + '|'
     miarka += '\n0'
@@ -80,7 +107,18 @@ def z3_5():
         miarka += ("%5d" % i)
     print(miarka)
 
+
 def z3_6():
+    """Rysuje prostokąt zbudowany z małych kratek.
+
+    Przykładowy prostokąt o wymiarach 2x4:
+    +---+---+---+---+
+    |   |   |   |   |
+    +---+---+---+---+
+    |   |   |   |   |
+    +---+---+---+---+
+    """
+
     x = int(input('dlugosc prostokota: '))
     y = int(input('wysokosc prostokota: '))
     prostokat = ''
@@ -90,50 +128,62 @@ def z3_6():
     prostokat += ('+---' * x) + '+'
     print(prostokat)
 
+
 def z3_8():
-    seq1 = [1,1,2,3,5,8,13,21,34]
-    seq2 = [1,2,3,4,5,6,7,7,100]
+    """Dla dwóch sekwencji znajduje:
+    listA - lista elementów występujących w obu sekwencjach (bez powtórzeń)
+    listB - lista wszystkich elementów z obu sekwencji (bez powtórzeń)
+    """
+
+    seq1 = [1, 1, 2, 3, 5, 8, 13, 21, 34]
+    seq2 = [1, 2, 3, 4, 5, 6, 7, 7, 100]
     listA = list(set(seq1) & set(seq2))
     listA.sort()
     listB = list(set(seq1) | set(seq2))
     listB.sort()
-    assert listA == [1,2,3,5]
-    assert listB == [1,2,3,4,5,6,7,8,13,21,34,100]
+    assert listA == [1, 2, 3, 5]
+    assert listB == [1, 2, 3, 4, 5, 6, 7, 8, 13, 21, 34, 100]
 
 
 def z3_9():
-    seq = [[],[4],(1,2),[3,4],(5,6,7)]
+    """Dla listy sekwencji znajduje listę sum liczb z tych sekwencji"""
+
+    seq = [[], [4], (1, 2), [3, 4], (5, 6, 7)]
     list_of_sums = [sum(sublist) for sublist in seq]
     print(list_of_sums)
-    assert list_of_sums == [0,4,3,7,18]
+    assert list_of_sums == [0, 4, 3, 7, 18]
+
 
 def z3_10():
+    """Słownik tłumaczący rzymskie liczby na arabskie"""
+
     # Pierwszy sposob tworzenia slownika
     D1 = {
-            'I': 1,
-            'V': 5,
-            'X': 10,
-            'L': 50,
-            'C': 100,
-            'D': 500,
-            'M': 1000,
-            }
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000,
+    }
     assert D1['L'] == 50
     assert D1['I'] == 1
 
     # Drugi sposob tworzenia slownika
     rzymskie = ['I', 'V', 'X', 'L', 'C', 'D', 'M']
     arabskie = [1, 5, 10, 50, 100, 500, 1000]
-    D2 = dict(zip(rzymskie,arabskie))
+    D2 = dict(zip(rzymskie, arabskie))
     assert D2['X'] == 10
     assert D2['C'] == 100
 
-z3_1();
-z3_2();
-z3_3();
-z3_4();
-z3_5();
-z3_6();
-z3_8();
-z3_9();
-z3_10();
+
+z3_1()
+z3_2()
+z3_3()
+z3_4()
+z3_5()
+z3_6()
+z3_8()
+z3_9()
+z3_10()

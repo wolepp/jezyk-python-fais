@@ -22,7 +22,7 @@ class Time:
         m = sec // 60
         sec = sec - m * 60
         return "{0:02d}:{1:02d}:{2:02d}".format(h, m, sec)
-    # 4834 : 01:20:34
+        # 4834 : 01:20:34
 
     def __repr__(self):
         """Zwraca string 'Time(s)'."""

@@ -5,6 +5,7 @@ Zadanie 6.5
 Wojciech Lepich
 """
 
+import unittest
 from math import gcd
 
 
@@ -100,8 +101,6 @@ class Frac:
     def __float__(self):       # float(frac)
         return self.x / self.y
 
-
-import unittest
 
 class TestFrac(unittest.TestCase):
 

@@ -21,6 +21,7 @@ class Node:
 
 def count_leafs(top):
     """Liczy liście drzewa binarnego."""
+
     leafs = 0
     if top is not None:
         if top.left:
@@ -34,6 +35,7 @@ def count_leafs(top):
 
 def calc_total(top):
     """Liczy sumę liczb przechowywanych w drzewie binarnym."""
+
     calc = 0
     if top is not None:
         calc += top.data

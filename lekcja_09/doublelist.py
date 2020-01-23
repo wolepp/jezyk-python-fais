@@ -14,19 +14,24 @@ class DoubleList:
     """Klasa reprezentująca całą listę dwukierunkową."""
 
     def __init__(self):
-        self.length = 0   # może to trzymać w polu data wartownika?
-        self.nil = Node()   # wartownik
+        self.length = 0
+        self.nil = Node()
         self.nil.next = self.nil
         self.nil.prev = self.nil
 
     def is_empty(self):
-        # return self.length == 0
+        """Sprawdza czy lista jest pusta"""
+
         return self.nil.next == self.nil
 
     def count(self):
+        """Zwraca liczbę elementów"""
+
         return self.length
 
     def insert_head(self, node):
+        """Wstawia node na pozycję head do listy"""
+
         node.next = self.nil.next
         node.prev = self.nil
         self.nil.next.prev = node
@@ -34,6 +39,8 @@ class DoubleList:
         self.length += 1
 
     def insert_tail(self, node):
+        """Wstawia node na pozycję tail do listy"""
+
         node.next = self.nil
         node.prev = self.nil.prev
         self.nil.prev.next = node
@@ -41,6 +48,8 @@ class DoubleList:
         self.length += 1
 
     def remove_head(self):   # zwraca node
+        """Usuwa i zwraca węzeł z pozycji head"""
+
         if self.is_empty():
             raise ValueError("pusta lista")
         node = self.nil.next
@@ -51,6 +60,8 @@ class DoubleList:
         return node
 
     def remove_tail(self):   # zwraca node
+        """Usuwa i zwraca węzeł z pozycji tail"""
+
         if self.is_empty():
             raise ValueError("pusta lista")
         node = self.nil.prev
@@ -62,6 +73,7 @@ class DoubleList:
 
     def find_max(self):
         """Zwraca łącze do węzła z największym kluczem."""
+
         if self.is_empty():
             return None
         max_node = node = self.nil.next
@@ -73,6 +85,7 @@ class DoubleList:
 
     def find_min(self):
         """Zwraca łącze do węzła z najmniejszym kluczem."""
+
         if self.is_empty():
             return None
         min_node = node = self.nil.next
@@ -83,8 +96,7 @@ class DoubleList:
         return min_node
 
     def remove(self, node):
-        """
-        Usuwa wskazany węzeł z listy.
+        """Usuwa wskazany węzeł z listy.
         
         Nie sprawdza czy node faktycznie jest elementem listy.
         """
@@ -104,6 +116,7 @@ class DoubleList:
 
     def clear(self):
         """Czyszczenie listy."""
+
         self.nil.next = self.nil
         self.nil.prev = self.nil
         self.length = 0

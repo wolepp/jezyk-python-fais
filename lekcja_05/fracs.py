@@ -12,8 +12,8 @@ from math import gcd    # fractions.gcd is deprecated
 
 
 def is_frac(*args):
-    """
-    Sprawdza czy podane argumenty są ułamkami.
+    """Sprawdza czy podane argumenty są ułamkami.
+
     Zwraca False, jeżeli którykolwiek z argumentów nie jest ułamkiem.
     Zwraca True w przeciwnym wypadku.
     """
@@ -28,18 +28,13 @@ def is_frac(*args):
 
 
 def lcm(a, b):
-    """
-    Least common multiple of a and b.
-    Najmniejsza wspólna wielokrotność
-    """
+    """Najmniejsza wspólna wielokrotność a i b"""
 
     return abs(a * b) // gcd(a, b)
 
 
 def simplify_frac(frac):
-    """
-    Upraszcza ułamek.
-    """
+    """Upraszcza ułamek."""
 
     if not is_frac(frac):
         raise TypeError("frac nie jest ulamkiem")
@@ -53,9 +48,7 @@ def simplify_frac(frac):
 
 
 def abs_frac(frac):
-    """
-    Zwraca wartość bezwzględną ułamka.
-    """
+    """Zwraca wartość bezwzględną ułamka."""
 
     if not is_frac(frac):
         raise TypeError("frac nie jest ulamkiem")
@@ -64,9 +57,7 @@ def abs_frac(frac):
 
 
 def reverse_frac(frac):
-    """
-    Odwraca zwrócony ułamek.
-    """
+    """Odwraca zwrócony ułamek."""
 
     if not is_frac(frac):
         raise TypeError("frac nie jest ulamkiem")
@@ -75,9 +66,7 @@ def reverse_frac(frac):
 
 
 def add_frac(frac1, frac2):
-    """
-    Zwraca ułamek będący sumą frac1 i frac2.
-    """
+    """Zwraca ułamek będący sumą frac1 i frac2."""
 
     if not is_frac(frac1, frac2):
         raise TypeError("argumenty musza byc ulamkami")
@@ -89,9 +78,7 @@ def add_frac(frac1, frac2):
 
 
 def sub_frac(frac1, frac2):
-    """
-    Zwraca ułamek będący różnicą frac1 i frac2.
-    """
+    """Zwraca ułamek będący różnicą frac1 i frac2."""
 
     if not is_frac(frac1, frac2):
         raise TypeError("argumenty musza byc ulamkami")
@@ -103,9 +90,7 @@ def sub_frac(frac1, frac2):
 
 
 def mul_frac(frac1, frac2):
-    """
-    Zwraca ułamek będący wynikiem mnożenia frac1 przez frac2.
-    """
+    """Zwraca ułamek będący wynikiem mnożenia frac1 przez frac2."""
 
     if not is_frac(frac1, frac2):
         raise TypeError("argumenty musza byc ulamkiem")
@@ -114,9 +99,7 @@ def mul_frac(frac1, frac2):
 
 
 def div_frac(frac1, frac2):
-    """
-    Zwraca ułamek będący wynikiem dzielenia frac1 przez frac2.
-    """
+    """Zwraca ułamek będący wynikiem dzielenia frac1 przez frac2."""
 
     if not is_frac(frac1, frac2):
         raise TypeError("argumenty musza byc ulamkiem")
@@ -127,9 +110,7 @@ def div_frac(frac1, frac2):
 
 
 def is_positive(frac):
-    """
-    Sprawdza czy ułamek ma dodatnią wartość.
-    """
+    """Sprawdza czy ułamek ma dodatnią wartość."""
 
     if not is_frac(frac):
         raise TypeError("frac nie jest ulamkiem")
@@ -139,9 +120,7 @@ def is_positive(frac):
 
 
 def is_zero(frac):
-    """
-    Sprawdza czy ułamek jest równy zero.
-    """
+    """Sprawdza czy ułamek jest równy zero."""
 
     if not is_frac(frac):
         raise TypeError("frac nie jest ulamkiem")
@@ -152,9 +131,7 @@ def is_zero(frac):
 
 
 def cmp_frac(frac1, frac2):
-    """
-    Porównuje dwa ułamki
-    """
+    """Porównuje dwa ułamki"""
 
     if not is_frac(frac1, frac2):
         raise TypeError("argumenty musza byc ulamkami")
@@ -168,9 +145,7 @@ def cmp_frac(frac1, frac2):
 
 
 def frac2float(frac):
-    """
-    Konwertuje ułamek do float.
-    """
+    """Konwertuje ułamek do float."""
 
     if not is_frac(frac):
         raise TypeError("frac nie jest ulamkiem")
@@ -179,9 +154,7 @@ def frac2float(frac):
 
 
 class TestFractions(unittest.TestCase):
-    """
-    Klasa testująca funkcje modułu fracs.
-    """
+    """Klasa testująca funkcje modułu fracs."""
 
     def setUp(self):
         self.zero = [0, 1]

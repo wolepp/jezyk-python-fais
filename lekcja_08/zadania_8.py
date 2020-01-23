@@ -11,6 +11,7 @@ import math
 
 def solve1(a, b, c):
     """Rozwiązywanie równania liniowego a x + b y + c = 0."""
+
     if a == 0 and b == 0:
         print('a i b nie mogą być równocześnie równe 0')
     elif b == 0:
@@ -21,7 +22,7 @@ def solve1(a, b, c):
         print("a = 0 => ax + by + c = by + c = 0")
         print("prosta równoległa do osi OX, przecina oś OY w punkcie")
         print("y = -c/b =", -c/b)
-    else: # a != 0 and b != 0
+    else:  # a != 0 and b != 0
         print("równanie kierunkowej prostej")
         print("ax + by + c => y = -(a/b)*x - c/b")
         print("prosta przecina oś OX w punkcie x = ", -c/a)
@@ -33,7 +34,9 @@ def solve1(a, b, c):
 
 def calc_pi(n=100):
     """Obliczanie liczby pi metodą Monte Carlo.
-    n oznacza liczbę losowanych punktów."""
+
+    n oznacza liczbę losowanych punktów.
+    """
 
     w_kole = 0
     for i in range(0, n):
@@ -45,8 +48,10 @@ def calc_pi(n=100):
 
 
 def heron(a, b, c):
-    """Obliczanie pola powierzchni trójkąta za pomocą wzoru
-    Herona. Długości boków trójkąta wynoszą a, b, c."""
+    """Obliczanie pola powierzchni trójkąta.
+
+    Wykorzystuje wzór Herona. Długości boków trójkąta wynoszą a, b, c.
+    """
 
     p = (a + b + c) / 2
     if not (a < b+c and b < a+c and c < a+b
@@ -61,6 +66,14 @@ P_VALUES = {0: {0: 0.5}}
 
 
 def P(i, j):
+    """Oblicza wartość funkcji P(i, j):
+
+    P(0, 0) = 0.5,
+    P(i, 0) = 0.0 dla i > 0,
+    P(0, j) = 1.0 dla j > 0,
+    P(i, j) = 0.5 * (P(i-1), j) + P(i, j-1)), dla i, j > 0
+    """
+
     if i < 0 or j < 0:
         raise ValueError('Argumenty muszą być nieujemne.')
 

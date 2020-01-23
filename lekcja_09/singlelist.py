@@ -28,17 +28,23 @@ class SingleList:
             self.current = self.current.next
             return current
         raise StopIteration
-        
+
     def __str__(self):
         return '[' + ', '.join([str(node) for node in self]) + ']'
 
     def is_empty(self):
+        """Sprawdza czy lista jest pusta"""
+
         return self.length == 0
 
     def count(self):      # tworzymy interfejs do odczytu
+        """Zwraca liczbę elementów"""
+
         return self.length
 
     def insert_head(self, node):
+        """Wstawia node na pozycję head do listy"""
+
         if self.length == 0:
             self.head = self.tail = node
         else:                   # dajemy na koniec listy
@@ -46,7 +52,12 @@ class SingleList:
             self.head = node
         self.length += 1
 
-    def insert_tail(self, node):   # klasy O(N)
+    def insert_tail(self, node):
+        """Wstawia node na pozycję tail do listy.
+
+        Funkcja klasy O(N)
+        """
+
         if self.length == 0:
             self.head = self.tail = node
         else:                   # dajemy na koniec listy
@@ -54,7 +65,12 @@ class SingleList:
             self.tail = node
         self.length += 1
 
-    def remove_head(self):          # klasy O(1)
+    def remove_head(self):
+        """Usuwa i zwraca węzeł z pozycji head.
+
+        Funkcja klasy O(1)
+        """
+
         if self.length == 0:
             raise ValueError("pusta lista")
         node = self.head
@@ -66,8 +82,9 @@ class SingleList:
         self.length -= 1
         return node   # zwracamy usuwany node
 
-    def remove_tail(self):          # klasy O(N)
-        """Skraca listę o jej ogon i go zwraca."""
+    def remove_tail(self):
+        """Usuwa i zwraca węzeł z pozycji tail"""
+
         if self.length == 0:
             raise ValueError("pusta lista")
         tail = self.tail
@@ -81,8 +98,9 @@ class SingleList:
             self.tail = node
         return tail
 
-    def merge(self, other):         # klasy O(1)
+    def merge(self, other):
         """Węzły z listy other są przepinane do listy self na jej koniec."""
+
         if other.length == 0:
             return
         if self.length == 0:
@@ -94,13 +112,18 @@ class SingleList:
         # czyszczenie listy other
         other.clear()
 
-    def clear(self):            # czyszczenie listy
+    def clear(self):
         """Czyści listę."""
+
         self.head = self.tail = None
         self.length = 0
 
-    def search(self, data):   # klasy O(N)
-        """Zwraca łącze do węzła o podanym kluczu lub None."""
+    def search(self, data):
+        """Zwraca łącze do węzła o podanym kluczu.
+
+        Zwraca None, jeżeli taki węzeł nie istnieje.
+        """
+
         if self.length == 0:
             return None
         node = self.head
@@ -110,8 +133,9 @@ class SingleList:
             node = node.next
         return node
 
-    def find_min(self):         # klasy O(N)
+    def find_min(self):
         """Zwraca łącze do węzła z najmniejszym kluczem."""
+
         if self.length == 0:
             return None
         min_node = node = self.head
@@ -121,8 +145,9 @@ class SingleList:
                 min_node = node
         return min_node
 
-    def find_max(self):         # klasy O(N)
+    def find_max(self):
         """Zwraca łącze do węzła z największym kluczem."""
+
         if self.length == 0:
             return None
         max_node = node = self.head
@@ -132,8 +157,9 @@ class SingleList:
                 max_node = node
         return max_node
 
-    def reverse(self):          # klasy O(N)
+    def reverse(self):
         """Odwracanie kolejności węzłów na liście."""
+
         current = self.head
         prev_node = None
         while current is not None:

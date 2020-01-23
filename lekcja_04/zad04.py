@@ -3,6 +3,7 @@
 
 from functools import reduce
 
+
 def zad4_2_miarka(length):
     """
     Zwraca miarke zadanej dlugosci.
@@ -20,7 +21,7 @@ def zad4_2_miarka(length):
         ...
     TypeError: dlugosc musi byc liczba
     """
-    
+
     try:
         length = int(length)
     except ValueError:
@@ -57,7 +58,7 @@ def zad4_2_prostokat(x, y):
     Traceback (most recent call last):
         ...
     TypeError: wymiar musi byc liczba
-    """ 
+    """
 
     try:
         x = int(x)
@@ -77,7 +78,7 @@ def zad4_2_prostokat(x, y):
 
 def zad4_3(n):
     """
-    Iteracyjna wersja funkcji factorial(n).
+    Iteracyjna funkcja oblizająca silnię z n
 
     >>> zad4_3(5)
     120
@@ -103,7 +104,7 @@ def zad4_3(n):
 
 def zad4_4(n):
     """
-    Iteracyjna wersja funkcji fibbonaci(n)
+    Iteracyjna funkcja obliczająca n-ty wyraz ciągu Fibonacciego
 
     >>> zad4_4(5)
     5
@@ -137,7 +138,7 @@ def zad4_4(n):
 
 def odwracanie(L, left, right):
     """
-    Odwraca kolejnosc elementow na liscie od left do right wlacznie.
+    Odwraca kolejność elementów na liście od left do right włącznie.
 
     Obsluguje ujemne indeksy.
     >>> odwracanie(list(range(10)), 0, 9)
@@ -183,9 +184,10 @@ def odwracanie(L, left, right):
         raise IndexError('argument left poza lista')
     if right >= len(L):
         raise IndexError('argument right poza lista')
-    
-    if left > right:
-        right, left = left, right
+
+    # nie rób nic, jeżeli left > right
+    # if left > right:
+    #     right, left = left, right
 
     while left < right:
         L[left], L[right] = L[right], L[left]
@@ -195,7 +197,7 @@ def odwracanie(L, left, right):
 
 def sum_seq(sequence):
     """
-    Oblicza sume liczb w sequence, ktora moze miec zagniezdzone sekwencje.
+    Oblicza sumę liczb w sequence, która może mieć zagnieżdżone sekwencje.
 
     >>> sum_seq([1, 2, 3])
     6
@@ -227,7 +229,7 @@ def sum_seq(sequence):
 
 def flatten(sequence):
     """
-    Splaszcza strukture sequence, ktora moze miec zagniezdzone sekwencje.
+    Spłaszcza strukturę sequence, która może mieć zagnieżdżone sekwencje.
 
     >>> flatten([])
     []
@@ -254,7 +256,7 @@ def flatten(sequence):
             alist.extend(flatten(element))
         else:
             alist.append(element)
-    return alist 
+    return alist
 
 
 if __name__ == '__main__':

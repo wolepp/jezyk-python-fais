@@ -19,17 +19,21 @@ class Stack:
         return str(self.items[:self.index])
 
     def is_empty(self):
-        # return not sum(self.exists)   # nawet w najgorszym przypadku wolniejsze niż any
-        # return not any(self.exists)   # przekombinowane podejście
+        """Sprawdza czy stos jest pusty"""
+
         return self.index == 0
 
     def is_full(self):
+        """Sprawdza czy stos jest pełny"""
+
         return self.index == self.size
 
     def push(self, item):
+        """Dodaje item do stosu"""
+
         if not 0 <= item <= self.size-1:
             raise ValueError(
-                'Wartość musi być liczbą całkowitą z przedziału [0, '+str(self.size-1)+']')
+                'Wartość musi być liczbą całkowitą z przedziału [0, {}]'.format(self.size-1))
         if self.exists[item]:
             return
         self.items[self.index] = item
@@ -37,6 +41,8 @@ class Stack:
         self.index += 1
 
     def pop(self):
+        """Zdejmuje element ze stosu i go zwraca"""
+
         if self.is_empty():
             raise Exception('Stos jest pusty')
         self.index -= 1

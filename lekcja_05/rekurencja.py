@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
 """
-Zawiera rekurencyjne funkcje do obliczania silnii oraz wyrazow
-ciagu Fibonacciego.
+Zawiera rekurencyjne funkcje do obliczania silnii oraz wyrazów
+ciągu Fibonacciego.
 """
-import functools
 
 
 def is_natural_number(arg):
@@ -23,12 +22,15 @@ def is_natural_number(arg):
         arg = int(arg)
     except (ValueError, TypeError):
         return False
+
+    if arg < 0:
+        return False
     return True
 
 
 def factorial(n):
     """
-    Iteracyjna wersja funkcji factorial(n).
+    Rekurencyjna funkcja do obliczania silnii z n
 
     >>> factorial(5)
     120
@@ -39,16 +41,18 @@ def factorial(n):
     if not is_natural_number(n):
         raise ValueError('n musi byc liczba naturalna')
 
-    return functools.reduce(lambda a, b: a * b, range(1, n+1))
+    if n in (0, 1):
+        return 1
+    return n * factorial(n - 1)
 
 
 def fibonacci(n):
     """
     Iteracyjna wersja funkcji fibbonaci(n)
 
-    >>> zad4_4(5)
+    >>> fibonacci(5)
     5
-    >>> [zad4_4(x) for x in range(10)]
+    >>> [fibonacci(x) for x in range(10)]
     [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
     """
 
@@ -57,8 +61,9 @@ def fibonacci(n):
 
     if n in (0, 1):
         return n
+    return fibonacci(n - 1) + fibonacci(n - 2)
 
-    fib0, fib1 = 0, 1
-    for i in range(2, n+1):
-        fib0, fib1 = fib1, fib0 + fib1
-    return fib1
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()

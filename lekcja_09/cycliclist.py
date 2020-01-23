@@ -21,12 +21,18 @@ class CyclicList:
         self.length = 0
 
     def is_empty(self):
+        """Sprawdza czy lista jest pusta"""
+
         return self.head is None
 
     def count(self):
+        """Zwraca liczbę elementów"""
+
         return self.length
 
     def insert_head(self, node):
+        """Wstawia node na pozycję head do listy"""
+
         if self.length == 0:
             self.head = self.tail = node
             self.head.next = self.head
@@ -37,6 +43,8 @@ class CyclicList:
         self.length += 1
 
     def insert_tail(self, node):
+        """Wstawia node na pozycję tail do listy"""
+
         if self.length == 0:
             self.head = self.tail = node
             node.next = node
@@ -46,7 +54,12 @@ class CyclicList:
             self.tail = node
         self.length += 1
 
-    def search(self, data):     # zwraca node lub None
+    def search(self, data):
+        """Zwraca węzeł, którego zawartość jest równa data.
+
+        Jeżeli taki węzeł nie istnieje, zwraca None.
+        """
+
         if self.length == 0:
             return None
         node = self.head
@@ -57,6 +70,8 @@ class CyclicList:
         return node
 
     def remove(self, node):
+        """Usuwa węzeł node z listy"""
+
         if self.is_empty():
             raise ValueError("pusta lista")
         if self.length == 1 and self.head == node:
@@ -75,9 +90,9 @@ class CyclicList:
             prev.next = node.next
         self.length -= 1
 
-
     def merge(self, other):
-        # scalanie dwóch list cyklicznych w czasie O(1)
+        """Scala dwie listy w czasie O(1)"""
+
         if other.is_empty():
             return
         if self.is_empty():
@@ -89,7 +104,9 @@ class CyclicList:
         self.length += other.count()
         other.clear()
 
-    def clear(self):            # czyszczenie listy
+    def clear(self):
+        """Czyści listę"""
+
         self.head = None
         self.tail = None
         self.length = 0
