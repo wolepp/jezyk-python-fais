@@ -31,7 +31,6 @@ def parse(cities_filename, distances_filename):
         gu.add_node(graph, city)
         for j, distance in enumerate(distances):
             target_city = cities[j]
-            if target_city is not city:
-                gu.add_edge_directed(graph, (city, target_city, distance))
+            gu.add_edge_directed(graph, (city, target_city, distance))
 
     return graph

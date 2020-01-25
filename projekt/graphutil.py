@@ -19,8 +19,8 @@ def add_edge_directed(graph, edge):
     add_node(graph, source)
     add_node(graph, target)
     # Możemy wykluczyć pętle.
-    if source == target:
-        raise ValueError("pętle są zabronione")
+    # if source == target:
+    #     raise ValueError("pętle są zabronione")
     if target not in graph[source]:
         graph[source][target] = weight
 
