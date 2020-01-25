@@ -56,8 +56,11 @@ def random_graph(size, max_weight=10, keys=None):
     Parametr keys (opcjonalny) to własne etykiety wierzchołków.
     """
     if keys is None:
-        keys = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-                'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+        if size <= 26:
+            keys = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+                    'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+        else:
+            keys = list(range(1, size+1))
 
     if len(keys) < size:
         raise ValueError('Zbyt mała ilość etykiet')
