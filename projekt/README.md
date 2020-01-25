@@ -30,3 +30,7 @@ if d[source][target] > new_weight:
 jest $\mathcal{O}(1)$. Każda pętla `for` jest $\mathcal{O}(|V|)$. Cała zagnieżdżona struktura pętl jest $\mathcal{O}(|V|^3)$, i jest to najbardziej złożona czasowo część algorytmu, więc cały algorytm też jest $\mathcal{O}(|V|^3)$.
 
 ## Spis funkcji
+
+## Licencja
+
+W programie używane są dane ze zbioru danych [CITIES](https://people.sc.fsu.edu/~jburkardt/datasets/cities/cities.html) udostępnianych na licencji [GNU LGPL](https://people.sc.fsu.edu/~jburkardt/txt/gnu_lgpl.txt).
