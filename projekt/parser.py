@@ -1,27 +1,33 @@
-"""Parser tworzący graf z danych."""
+"""Moduł zawiera funkcję do przetwarzania plików z danymi dotyczącymi
+odległości między miastami na graf ważony skierowany.
+"""
 
 import re
-import graphutil
+import graphutil as gu
 
-def parse(cities_filename, distance_filename):
-    # 'Youngstown, OH'; 'Tyler, TX'; 'Tulsa, OK'
-    pattern_city = re.compile(r'\w*, [A-Z][A-Z]')
+
+def parse(cities_filename, distances_filename):
+    """Przetwarza dane z pliku na graf skierowany.
+
+    Przyjmuje nazwy dwóch plików, jeden z nazwami miast, drugi z odległościami
+    pomiędzy miastami.
+    """
+    pattern = re.compile(r'\w*, [A-Z][A-Z]')
     with open(cities_filename, 'r') as file:
         data = file.read()
-    cities = pattern_city.findall(data)
+    cities = pattern.findall(data)
 
-    N = len(cities)
-    with open(distance_filename, 'r') as file:
+    with open(distances_filename, 'r') as file:
         data = file.read()
-        data = data.splitlines()[7:]
-    
-    # for indeks, miasto in enumerate(cities):
-    #     pass
+    # rozdzielenie na linie i usunięcie zbędnych
+    data = data.splitlines()[7:]
 
+    graph = {}
+    for i, city in enumerate(cities):
+        distances = [int(distance) for distance in data[i].split()]
+        gu.add_node(graph, city)
+        for j, distance in enumerate(distances):
+            target_city = cities[j]
+            gu.add_edge_directed(graph, (city, target_city, distance))
 
-if __name__ == "__main__":
-    import os
-    dirname = os.path.dirname(__file__)
-    miasta = os.path.join(dirname, 'data', 'sgb128_name.txt')
-    odlegl = os.path.join(dirname, 'data', 'sgb128_dist.txt')
-    parse(miasta, odlegl)
+    return graph
