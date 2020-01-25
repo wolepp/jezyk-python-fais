@@ -48,12 +48,12 @@ if __name__ == "__main__":
 
     graf = {
         "A": {"B": 1, "C": 2},
-        "B": {"C": -3, "D": 5, "F": 8},
-        "C": {"A": 3, "B": -1, "D": 1},
+        "B": {"C": 2, "D": 5, "F": 8},
+        "C": {"A": 3, "B": 1, "D": 1},
         "D": {"C": 6},
         "E": {"C": 7},
         "F": {"B": 1, "E": 3}
     }
 
-    sciezki = floydwarshall(graf)
-    graphutil.print_graph(sciezki)
+    shortest_path = floydwarshall(graf)
+    graphutil.print_graph(shortest_path)
