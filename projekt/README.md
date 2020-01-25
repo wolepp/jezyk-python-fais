@@ -27,6 +27,6 @@ if d[source][target] > new_weight:
     d[source][target] = new_weight
 ```
 
-jest $\mathcal{O}(1)$. Każda pętla `for` jest $\mathcal{O}(|V|)$. Cała zagnieżdżona struktura pętl jest $\mathcal{O}(|V|^3)$, i jest to najbardziej złożono czasowo część algorytmu, więc cały algorytm też jest $\mathcal{O}(|V|^3)$.
+jest $\mathcal{O}(1)$. Każda pętla `for` jest $\mathcal{O}(|V|)$. Cała zagnieżdżona struktura pętl jest $\mathcal{O}(|V|^3)$, i jest to najbardziej złożona czasowo część algorytmu, więc cały algorytm też jest $\mathcal{O}(|V|^3)$.
 
 ## Spis funkcji
