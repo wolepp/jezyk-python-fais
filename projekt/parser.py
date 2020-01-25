@@ -12,16 +12,19 @@ def parse(cities_filename, distances_filename):
     Przyjmuje nazwy dwóch plików, jeden z nazwami miast, drugi z odległościami
     pomiędzy miastami.
     """
+    # wczytanie miast
     pattern = re.compile(r'\w*, [A-Z][A-Z]')
     with open(cities_filename, 'r') as file:
         data = file.read()
     cities = pattern.findall(data)
 
+    # wczytanie odległości
     with open(distances_filename, 'r') as file:
         data = file.read()
     # rozdzielenie na linie i usunięcie zbędnych
     data = data.splitlines()[7:]
 
+    # stworzenie grafu
     graph = {}
     for i, city in enumerate(cities):
         distances = [int(distance) for distance in data[i].split()]
