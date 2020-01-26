@@ -12,16 +12,23 @@ import floyd
 if __name__ == "__main__":
 
     dirname = os.path.dirname(__file__)
-    cities_filename = os.path.join(dirname, 'data', 'sgb128_name.txt')
-    distances_filename = os.path.join(dirname, 'data', 'sgb128_dist.txt')
+    data_dirname = os.path.join(dirname, 'data')
+    cities_filename = os.path.join(data_dirname, 'sgb128_name.txt')
+    distances_filename = os.path.join(data_dirname, 'sgb128_dist.txt')
 
-    oryg_graf = os.path.join(dirname, 'input.txt')
-    nowy_graf = os.path.join(dirname, 'output.txt')
+    old_distances = parser.parse(cities_filename, distances_filename)
+    new_distances = floyd.floydwarshall(old_distances)
 
-    graph = parser.parse(cities_filename, distances_filename)
-    with open(oryg_graf, 'w') as file:
-        file.write(str(graph))
+    # szukanie największej bezwzględnej zmiany w odległości
+    max_change = 0
+    cities = old_distances.keys()
+    for cityA in cities:
+        for cityB in cities:
+            old = old_distances[cityA][cityB]
+            new = new_distances[cityA][cityB]
+            if old - new > max_change:
+                max_change = old - new
+                max_cityA, max_cityB = cityA, cityB
 
-    shortest_distances = floyd.floydwarshall(graph)
-    with open(nowy_graf, 'w') as file:
-        file.write(str(shortest_distances))
+    print("Największa zmiana w drodze z {} do {}, zmiana o: {} mil".format(
+        max_cityA, max_cityB, max_change))
