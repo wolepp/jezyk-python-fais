@@ -14,3 +14,4 @@
 * [Lekcja 10](https://github.com/wolepp/jezyk-python-fais/tree/master/lekcja_10) - abstrakcyjne typy danych
 * [Lekcja 11](https://github.com/wolepp/jezyk-python-fais/tree/master/lekcja_11) - sortowanie
 * [Lekcja 12](https://github.com/wolepp/jezyk-python-fais/tree/master/lekcja_12) - wyszukiwanie
+* [Projekt](https://github.com/wolepp/jezyk-python-fais/tree/master/projekt) - algorytm Floyda-Warshalla i wyszukiwanie najkrótszych dróg między miastami Ameryki Północnej
