@@ -4,7 +4,7 @@ Algorytm Floyda-Warshalla.
 Wojciech Lepich
 """
 from math import inf
-import graphutil
+import graphutil as gu
 
 
 def floydwarshall(graph):
@@ -13,8 +13,8 @@ def floydwarshall(graph):
 
     Przyjmuje graf typu dict+dict.
     """
-    nodes = graphutil.list_nodes(graph)
-    edges = graphutil.list_edges(graph)
+    nodes = gu.list_nodes(graph)
+    edges = gu.list_edges(graph)
 
     # macierz d[n*n], każda wartość zainicjalizowana wartością nieskończoność
     # w postaci słownika
@@ -56,4 +56,11 @@ if __name__ == "__main__":
     }
 
     shortest_path = floydwarshall(graf)
-    graphutil.print_graph(shortest_path)
+    assert shortest_path == {
+        "A": {"A": 0, "B": 1, "C": 2, "D": 3, "E": 12, "F": 9},
+        "B": {"A": 5, "B": 0, "C": 2, "D": 3, "E": 11, "F": 8},
+        "C": {"A": 3, "B": 1, "C": 0, "D": 1, "E": 12, "F": 9},
+        "D": {"A": 9, "B": 7, "C": 6, "D": 0, "E": 18, "F": 15},
+        "E": {"A": 10, "B": 8, "C": 7, "D": 8, "E": 0, "F": 16},
+        "F": {"A": 6, "B": 1, "C": 3, "D": 4, "E": 3, "F": 0},
+    }
